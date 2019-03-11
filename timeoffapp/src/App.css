@@ -1,16 +1,17 @@
+.App-logo ul li{
+  background: #7F8688;
+  color: #F3E367;
+}
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 50px;
-  position: relative;
+.App-login ul li{
+  background: #F3E367;
 }
 
 .App-header{
-  /* background-color: #282c34; */
+  background: #929D9E;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
 }
 
 ul{
@@ -18,16 +19,15 @@ ul{
   display: flex;
 }
 
-ul li{
+li{
   margin: 5px;
   padding: 10px;
   font-size: 20px;
   border: 10px;
   border-radius: 10px;
-  background: #2E9CCA;
+  background: #F3E367;
+  color: #2E9CCA;
 }
-
-
 
 .App-details{
   display: flex;
@@ -36,6 +36,7 @@ ul li{
   text-align: center;
   line-height: 20px;
   padding: 10px;
+  color: #FEFEFE;
   
 }
 
@@ -45,17 +46,18 @@ ul li{
   bottom: 0;
   width: 100%;
   text-align: center;
-  color: #2E9CCA;
-  background: #25274D;
+  color: #fefefe;
+  background: #7F8688;
 }
 
-.App-details button{
+.App-details>button{
   width: 100px;
   margin: auto;
   padding: 10px;
-  border: 5px solid #25274D;
+  font-size: 20px;
+  border: 10px;
+  background: #F3E367;
   border-radius: 20px;
-  background: #ffffff;
   font-size: 1em;
   color: #2E9CCA;
   cursor: pointer;

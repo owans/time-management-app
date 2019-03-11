@@ -1,32 +1,66 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {Link} from'react-router-dom';
+import {Link, BrowserRouter as Router} from'react-router-dom';
+import SignUp from './signup';
+
 
 class Home extends Component{
+    constructor(props){
+        super(props);
+
+        this.state = {
+            SignUp: []
+        };
+        this.handleClick=this.handleClick.bind(this);
+        }
+
+        handleClick = (e) => {
+            e.preventDefault();
+            this.setState({
+              SignUp: ""
+            });
+
+    }
+
     render(){
         return (
                 <div className="App">
                     <header className="App-header">
                     <div className="App-logo">
-                        <img src={logo} className="App-logo" alt="logo"></img>
+                    <ul>
+                        
+                        <Router path="exact /" component={Home}>
+                        <li><Link to="/" style={{textDecoration:'none'}}>OwaTimer</Link></li>
+                        </Router>
+                    </ul>
                     </div>
+
+                    <div className="App-login">
                         <ul>
-                            <li><Link to="" style={{textDecoration:'none'}}>Home</Link></li>
-                            <li><Link to="" style={{textDecoration:'none'}}>TeamView</Link></li>
-                            <li><Link to="" style={{textDecoration:'none'}}>LogIn</Link></li>
+                            
+                            <Router path="/" component={SignUp}>
+                            <li><Link to="/" style={{textDecoration:'none'}}>LogIn</Link></li>
+                            </Router>
+                        
                         </ul>
+                    </div>
+                        
                     </header>
 
                     <div className="App-details">
-                        <h1>TimeOff.Management</h1>
-                        <h2>Open Source, Simple yet powerful absence management software, for small and medium sized businesses</h2>
-                        <p>Endorsed by hundreds of software developers</p>
-                        <button type="submit" value="submit"><Link to='' style={{textDecoration:'none'}}>SignUp</Link></button>
+                        <h1>OwaTimer </h1>
+                        <h2>Open Source, OwaTimer manages your staff leave,offs etc</h2>
+                        <h3>It works for small and medium-sized businesses</h3>
+                        <p>Endorsed by the levelUp Academy Team of Professionals</p>
+                        <Router path="/signup" component={SignUp}>
+                        <button type="submit" value="submit" onClick={this.handleClick}><Link to='/signup' style={{textDecoration:'none'}}>SignUp</Link></button>
+                        
+                        </Router>
+                        { this.state.handleClick}
                     </div>
 
                     <footer className="flex-footer">
-                       &copy;Copyrights 2018, time.Management
+                       &copy; Copyrights 2019, OwaTimer.
                     </footer>
                 </div>
         )
