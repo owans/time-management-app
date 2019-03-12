@@ -2,14 +2,13 @@ import React, {Component} from 'react';
 import Form from 'react-bootstrap/Form';
 import {Button} from 'react-bootstrap';
 import '../src/index.css';
-//import {Link, BrowserRouter as Router} from 'react-router-dom';
-//import Home from './home';
+
 class Login extends Component{
     render(){
         return(
             <div className="container">
-                <h2>LogIn</h2>
-                <Form>
+                <h2>Log-In</h2>
+                <Form className="container">
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control type="email" placeholder="Enter email" />

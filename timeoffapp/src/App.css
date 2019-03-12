@@ -1,43 +1,94 @@
-.App-logo ul li{
-  background: #7F8688;
-  color: #F3E367;
+html {
+  box-sizing: border-box;
 }
 
-.App-login ul li{
-  background: #F3E367;
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
 }
 
-.App-header{
-  background: #929D9E;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-ul{
+nav {
+  width: 100%;
+  background-color: #2e9cca;
+  padding-left: 40px;
+  padding-right: 10px;
+}
+
+.logo {
+  display: inline-block;
+  background: #2e9cca;
+  color: #fefefe;
+  padding: 5px 10px;
+  border: 10px;
+  border-radius: 10px;
+  
+}
+
+.logo a{
+  color: #fefefe;
+  font-size: 20px;
+}
+
+.nav-links {
+  margin:   7px;
+  padding: 8px;
   list-style-type: none;
   display: flex;
 }
 
-li{
-  margin: 5px;
-  padding: 10px;
-  font-size: 20px;
+.nav-item{
+  display: inline-block;
+  padding: 5px 20px;
   border: 10px;
   border-radius: 10px;
-  background: #F3E367;
-  color: #2E9CCA;
+  color: #fefefe;
 }
 
-.App-details{
+.nav-item a{
+  color: #fefefe;
+  font-size: 20px;
+}
+
+.nav-item:hover {
+  background-color: #fefefe;
+}
+
+.logo:hover{
+  background-color: #fefefe;
+  
+}
+
+.bodyContainer{
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  align-items: flex-start;
+  text-align: start;
   line-height: 20px;
   padding: 10px;
-  color: #FEFEFE;
-  
+  background-color: #29648A;
+  color: #fefefe;
+}
+
+.bodyContainer>.image{
+  flex: 1 0 0%;
+  text-align: right;
+}
+
+.image>img{
+  vertical-align: top;
+  max-width: 100%;
+  max-height: 300px;
+}
+
+.bodyContainer>.text{
+  flex: 2 0 0%;
+  margin: auto 0;
 }
 
 .flex-footer{
@@ -47,27 +98,24 @@ li{
   width: 100%;
   text-align: center;
   color: #fefefe;
-  background: #7F8688;
+  background: #2e9cca;
 }
+  
 
-.App-details>button{
+  .bodyContainer button{
   width: 100px;
   margin: auto;
   padding: 10px;
   font-size: 20px;
   border: 10px;
-  background: #F3E367;
+  background: #AAABBB;
+  color: #29648A;
   border-radius: 20px;
   font-size: 1em;
-  color: #2E9CCA;
   cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.bodyContainer button:hover{
+  background: #fefefe;
 }
+

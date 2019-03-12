@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../src/index.css'
+import '../src/index.css';
 import Form, {Col} from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import {Button} from 'react-bootstrap';
@@ -24,8 +24,8 @@ class SignUp extends Component{
       const { validated } = this.state;
         return(
             <div className="container">
-              <h1>Sign Up here!</h1>
-      <Form
+              <h1>Sign-Up here!</h1>
+      <Form className="container"
         noValidate
         validated={validated}
         onSubmit={e => this.handleSubmit(e)}
@@ -52,19 +52,19 @@ class SignUp extends Component{
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
           <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-            <Form.Label>Username</Form.Label>
+            <Form.Label>Email</Form.Label>
             <InputGroup>
               <InputGroup.Prepend>
                 <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
               </InputGroup.Prepend>
               <Form.Control
-                type="text"
-                placeholder="Username"
+                type="email"
+                placeholder="Email"
                 aria-describedby="inputGroupPrepend"
                 required
               />
               <Form.Control.Feedback type="invalid">
-                Please choose a username.
+                Please choose a valid email.
               </Form.Control.Feedback>
             </InputGroup>
           </Form.Group>
@@ -99,7 +99,7 @@ class SignUp extends Component{
             feedback="You must agree before submitting."
           />
           </Form.Group>
-                <Button type="submit" bsStyle="success" onSubmit={this.handleSubmit}>Submit form</Button>
+                <Button type="submit" bsStyle="success" onSubmit={this.handleSubmit}>SignUp</Button>
         </Form>
       
           </div>
