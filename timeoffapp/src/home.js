@@ -1,47 +1,29 @@
 import React, {Component} from 'react';
 import './App.css';
-import {Link, BrowserRouter as Router} from'react-router-dom';
-import SignUp from './signup';
-
-
+// import {Link, BrowserRouter as Router, Route, /*Switch**/} from'react-router-dom';
+// import SignUp from './signup';
+// import Login from './login';
 class Home extends Component{
-    constructor(props){
-        super(props);
-
-        this.state = {
-            SignUp: []
-        };
-        this.handleClick=this.handleClick.bind(this);
-        }
-
-        handleClick = (e) => {
-            e.preventDefault();
-            this.setState({
-              SignUp: ""
-            });
-
-    }
-
     render(){
         return (
-                <div className="App">
+            
+                <div className="container">
                     <header className="App-header">
                     <div className="App-logo">
                     <ul>
+                        {/* <Route path="exact /" component={Home}/> */}
+                        {/* <li><Link to="/" style={{textDecoration:'none'}}>OwaTimer</Link></li> */}
                         
-                        <Router path="exact /" component={Home}>
-                        <li><Link to="/" style={{textDecoration:'none'}}>OwaTimer</Link></li>
-                        </Router>
+                        
                     </ul>
                     </div>
 
                     <div className="App-login">
                         <ul>
                             
-                            <Router path="/" component={SignUp}>
-                            <li><Link to="/" style={{textDecoration:'none'}}>LogIn</Link></li>
-                            </Router>
-                        
+                            {/* <Route path="/login" component={Login}/> */}
+                            {/* <li><Link to="login" style={{textDecoration:'none'}}>LogIn</Link></li> */}
+                            
                         </ul>
                     </div>
                         
@@ -52,11 +34,12 @@ class Home extends Component{
                         <h2>Open Source, OwaTimer manages your staff leave,offs etc</h2>
                         <h3>It works for small and medium-sized businesses</h3>
                         <p>Endorsed by the levelUp Academy Team of Professionals</p>
-                        <Router path="/signup" component={SignUp}>
-                        <button type="submit" value="submit" onClick={this.handleClick}><Link to='/signup' style={{textDecoration:'none'}}>SignUp</Link></button>
                         
-                        </Router>
-                        { this.state.handleClick}
+                        
+                        {/* <Route path="/signup" component={SignUp}/> */}
+                        <button type="submit" value="submit" style={{textDecoration:'none'}}>SignUp</button>
+                        {/* <button type="submit" value="submit"><Link to='/signup' style={{textDecoration:'none'}}>SignUp</Link></button> */}
+                        
                     </div>
 
                     <footer className="flex-footer">

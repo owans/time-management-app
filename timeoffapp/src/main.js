@@ -1,48 +1,35 @@
 import React, { Component } from 'react';
-// import Home from './home';
-import SignUp from './signup.js';
-import { BrowserRouter, Route } from 'react-router-dom';
-class Main extends Component {
-  render() {
+import Home from './home';
+import SignUp from './signup';
+import Login from './login';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+class Main extends Component{
+    render(){
     return (
-    <div>
-      <BrowserRouter>
+      <Router>
         <div>
-            {/* <Route exact path='/' component={Home}/> */}
-            <Route path="/signup.js" component={SignUp}/>
-            <Route />
+          <ul>
+            <li>
+              <Link to="/" component={Home}>Home</Link>
+            </li>
+            <li>
+              <Link to="/signup/" component={SignUp}>SignUp</Link>
+            </li>
+
+            <li>
+              <Link to="/login/" component={Login}>Login</Link>
+            </li>
+          </ul>
+  
+          <hr /> 
+
+          <Route exact path="/" component={Home} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/login" component={Login} />
         </div>
-      </BrowserRouter>
-      </div>
-      
+      </Router>
     );
   }
 }
 
 export default Main;
-
-// class Main extends Component{
-//     render(){
-//     return (
-//       <Router>
-//         <div>
-//           <ul>
-//             <li>
-//               <Link to="/">Home</Link>
-//             </li>
-//             <li>
-//               <Link to="/signup">SignUp</Link>
-//             </li>
-//           </ul>
-  
-//           <hr />
-  
-//           <Route exact path="/" component={Home} />
-//           <Route path="/signup" component={SignUp} />
-//         </div>
-//       </Router>
-//     );
-//   }
-// }
-
-// export default Main;
