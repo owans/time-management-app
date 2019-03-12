@@ -91,7 +91,7 @@ class SignUp extends Component{
           <Form.Row>
         <Form.Group as={Col} md="4" controlId="validationCustom03">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" pattern=".+@.+\..+" id="password-input" placeholder="Password" required />
+            <Form.Control type="password" min="6" max="10" placeholder="Password" required />
             <Form.Control.Feedback type="invalid">
               Please provide a password
             </Form.Control.Feedback>
@@ -100,7 +100,7 @@ class SignUp extends Component{
           <Form.Row>        
             <Form.Group as={Col} md="4" controlId="validationCustom03">
             <Form.Label>Confirm Password</Form.Label>
-            <Form.Control type="password" pattern=".+@.+\..+" id="confirm-password" placeholder="Confirm password" required />
+            <Form.Control type="password" min="6" max="10" placeholder="Confirm password" required />
             <Form.Control.Feedback type="invalid">
               Please confirm password
             </Form.Control.Feedback>
