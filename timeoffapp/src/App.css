@@ -55,8 +55,8 @@ nav {
 }
 
 .nav-item:hover {
-  background-color: #fefefe;
-  color: #296484;
+  background-color: #296484;
+  color: #fefefe;
 }
 
 .logo:hover{
