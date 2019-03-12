@@ -3,6 +3,8 @@ import '../src/index.css';
 import Form, {Col} from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import {Button} from 'react-bootstrap';
+
+
 class SignUp extends Component{
   constructor(...args) {
     super(...args);
@@ -23,39 +25,55 @@ class SignUp extends Component{
     render(){
       const { validated } = this.state;
         return(
-            <div className="container">
-              <h1>Sign-Up here!</h1>
-      <Form className="container"
+            <div className="container" col col-md-8>
+              <h1>SignUp here!</h1>
+      <Form className="container" 
         noValidate
         validated={validated}
         onSubmit={e => this.handleSubmit(e)}
       >
         <Form.Row>
-          <Form.Group as={Col} md="4" controlId="validationCustom01">
+
+        <Form.Group as={Col} md="4" controlId="validationCustom01">
+            <Form.Label>Company name</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              placeholder="First name"
+            />
+            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+        <Form.Group as={Col} md="4" controlId="validationCustom01">
             <Form.Label>First name</Form.Label>
             <Form.Control
               required
               type="text"
               placeholder="First name"
+              id="frst-name"
               
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
+          </Form.Row>
+          <Form.Row>
           <Form.Group as={Col} md="4" controlId="validationCustom02">
             <Form.Label>Last name</Form.Label>
             <Form.Control
               required
               type="text"
               placeholder="Last name"
-              
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
+          </Form.Row>
+          <Form.Row>
           <Form.Group as={Col} md="4" controlId="validationCustomUsername">
             <Form.Label>Email</Form.Label>
             <InputGroup>
               <InputGroup.Prepend>
-                <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
+                <InputGroup.Text id="inputGroupPrepend" pattern=".+@.+\..+" >@</InputGroup.Text>
               </InputGroup.Prepend>
               <Form.Control
                 type="email"
@@ -69,29 +87,59 @@ class SignUp extends Component{
             </InputGroup>
           </Form.Group>
         </Form.Row>
-        <Form.Row>
-          <Form.Group as={Col} md="6" controlId="validationCustom03">
+        
+          <Form.Row>
+        <Form.Group as={Col} md="4" controlId="validationCustom03">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" pattern=".+@.+\..+" id="password-input" placeholder="Password" required />
+            <Form.Control.Feedback type="invalid">
+              Please provide a password
+            </Form.Control.Feedback>
+          </Form.Group>
+          </Form.Row>
+          <Form.Row>        
+            <Form.Group as={Col} md="4" controlId="validationCustom03">
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control type="password" pattern=".+@.+\..+" id="confirm-password" placeholder="Confirm password" required />
+            <Form.Control.Feedback type="invalid">
+              Please confirm password
+            </Form.Control.Feedback>
+          </Form.Group>
+          </Form.Row>
+
+          <Form.Row>
+
+          <Form.Group as={Col} md="4" controlId="validationCustom03">
             <Form.Label>City</Form.Label>
             <Form.Control type="text" placeholder="City" required />
             <Form.Control.Feedback type="invalid">
               Please provide a valid city.
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="3" controlId="validationCustom04">
+          </Form.Row>
+
+          <Form.Row>
+
+          <Form.Group as={Col} md="4" controlId="validationCustom04">
             <Form.Label>State</Form.Label>
             <Form.Control type="text" placeholder="State" required />
             <Form.Control.Feedback type="invalid">
               Please provide a valid state.
             </Form.Control.Feedback>
-          </Form.Group>
+            </Form.Group>
+          </Form.Row>
+
+          <Form.Row>
           <Form.Group as={Col} md="3" controlId="validationCustom05">
-            <Form.Label>Zip</Form.Label>
-            <Form.Control type="text" placeholder="Zip" required />
+            <Form.Label>Time Zone</Form.Label>
+            <Form.Control type="time" placeholder="Time zone" required />
             <Form.Control.Feedback type="invalid">
-              Please provide a valid zip.
+              Please provide a valid Time Zone.
             </Form.Control.Feedback>
           </Form.Group>
         </Form.Row>
+
+        <Form.Row>
         <Form.Group>
           <Form.Check
             required
@@ -99,7 +147,10 @@ class SignUp extends Component{
             feedback="You must agree before submitting."
           />
           </Form.Group>
-                <Button type="submit" bsStyle="success" onSubmit={this.handleSubmit}>SignUp</Button>
+          </Form.Row>
+          
+
+                <Button type="submit" bsStyle="success">SignUp</Button>
         </Form>
       
           </div>
