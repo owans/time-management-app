@@ -13,6 +13,10 @@ class SignUp extends Component{
     this.handleSubmit=this.handleSubmit.bind(this);
   }
 
+  onSubmit = () => {
+    this.props.history.push('/login');
+  }
+
   handleSubmit(event) {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -25,8 +29,8 @@ class SignUp extends Component{
     render(){
       const { validated } = this.state;
         return(
-            <div className="container" col col-md-8>
-              <h1>SignUp here!</h1>
+            <div className="container" col-md-8="true">
+              <h1>SignUp</h1>
       <Form className="container" 
         noValidate
         validated={validated}
@@ -39,7 +43,7 @@ class SignUp extends Component{
             <Form.Control
               required
               type="text"
-              placeholder="First name"
+              placeholder="Company name"
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
@@ -91,7 +95,7 @@ class SignUp extends Component{
           <Form.Row>
         <Form.Group as={Col} md="4" controlId="validationCustom03">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" min="6" max="10" placeholder="Password" required />
+            <Form.Control type="password" maxLength="10" placeholder="Password" required />
             <Form.Control.Feedback type="invalid">
               Please provide a password
             </Form.Control.Feedback>
@@ -100,7 +104,7 @@ class SignUp extends Component{
           <Form.Row>        
             <Form.Group as={Col} md="4" controlId="validationCustom03">
             <Form.Label>Confirm Password</Form.Label>
-            <Form.Control type="password" min="6" max="10" placeholder="Confirm password" required />
+            <Form.Control type="password" maxLength="10" placeholder="Confirm password" required />
             <Form.Control.Feedback type="invalid">
               Please confirm password
             </Form.Control.Feedback>
@@ -150,7 +154,7 @@ class SignUp extends Component{
           </Form.Row>
           
 
-                <Button type="submit" bsStyle="success">SignUp</Button>
+                <Button type="submit" onClick={this.onSubmit} >SignUp</Button>
         </Form>
       
           </div>

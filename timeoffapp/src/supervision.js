@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class TeamView extends Component{
+class Supervision extends Component{
     render(){
         return(
             <div>
@@ -10,4 +10,4 @@ class TeamView extends Component{
     }
 }
 
-export default TeamView;
+export default Supervision;

@@ -1,6 +1,5 @@
-import React from 'react';
-
-class Clock extends React.Component {
+import React, {Component} from 'react';
+class Clock extends Component {
   constructor(props) {
     super(props);
     this.state = {

@@ -2,16 +2,20 @@ import React, {Component} from 'react';
 import manage from '../src/manage.svg';
 
 class Home extends Component{
+  onSubmit = () => {
+    this.props.history.push('/signup');
+  }
+
     render(){
         return (
                 <div className="container">
                     <div className="bodyContainer">
-                    <div class="text">
+                    <div className="text">
                         <h1>OwaTimer </h1>
-                        <h2>Want to keep track of your leave,offs</h2>
-                        <h3>Want to take that so desired vacation??</h3>
-                        <p>Sign up to find out how</p>
-                        <button type="submit" value="submit" style={{textDecoration:'none'}}>SignUp</button>
+                        <h2>want to keep track of your leave,offs</h2>
+                        <h3>want to take that so desired vacation??</h3>
+                        {/* <p>Sign up to find out how</p> */}
+                        <button type="submit" value="submit" onClick={this.onSubmit} style={{textDecoration:'none'}}>SignUp</button>
                     </div>      
                         
                         <div className="image">
@@ -22,7 +26,7 @@ class Home extends Component{
                     </div>
 
                     <footer className="flex-footer">
-                       &copy; Copyrights 2019, OwaTimer.
+                       &copy; 2019, OwaTimer.
                     </footer>
                 </div>
         )
