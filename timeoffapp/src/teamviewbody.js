@@ -4,55 +4,9 @@ export default class TeamviewBody extends React.Component{
     render(){
         return(
             
+            
         <div>
-              <div className="d-flex justify-content-between container m-3">
-                <h6 className="text-primary">Approved Request</h6>
-                </div>
-
-                <table class="table font">
-                <thead>
-                <tr>
-                    <th scope="col">Employee</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Deducted</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Approved By</th>
-                    <th scope="col">Remark</th>
-                    <th scope="col">Status</th>
-
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                <td>Owanate Amachree</td>      
-                <td>Maternity</td>
-                <td>10 Days</td>
-                <td>2021-1-15 To 2021-1-25</td>
-                <td>Kunle</td>
-                <td>Good</td>
-                <td>Approved</td>
-                </tr>
-                <tr>
-                <td>Ibiere boyle</td>
-                <td>Vacation</td>
-                <td>7 Days</td>
-                <td>2019-3-15 To 2019-3-21</td>
-                <td>Mayowa</td>
-                <td>Good</td>
-                <td>Approved</td>
-                </tr>
-                <tr>
-                <td>Opuine Amachre</td>    
-                <td>Wedding Purpose</td>
-                <td>14 Days</td>
-                <td>2019-5-1 To 2019-5-14</td>
-                <td>Kunle</td>
-                <td>Good</td>
-                <td>Approved</td>
-                </tr>
-                </tbody>
-                </table>
-                    <div>
+            <div>
                         <div className="d-flex justify-content-between container m-3">
                         <h6 className="text-primary">Leave Request to Approve</h6>
                         </div>
@@ -112,6 +66,54 @@ export default class TeamviewBody extends React.Component{
 
                         </div>
                             </div>
+              <div className="d-flex justify-content-between container m-3">
+                <h6 className="text-primary">Approved Request</h6>
+                </div>
+
+                <table class="table font">
+                <thead>
+                <tr>
+                    <th scope="col">Employee</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Deducted</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Approved By</th>
+                    <th scope="col">Remark</th>
+                    <th scope="col">Status</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <td>Owanate Amachree</td>      
+                <td>Maternity</td>
+                <td>10 Days</td>
+                <td>2021-1-15 To 2021-1-25</td>
+                <td>Kunle</td>
+                <td>Good</td>
+                <td>Approved</td>
+                </tr>
+                <tr>
+                <td>Ibiere boyle</td>
+                <td>Vacation</td>
+                <td>7 Days</td>
+                <td>2019-3-15 To 2019-3-21</td>
+                <td>Mayowa</td>
+                <td>Good</td>
+                <td>Approved</td>
+                </tr>
+                <tr>
+                <td>Opuine Amachre</td>    
+                <td>Wedding Purpose</td>
+                <td>14 Days</td>
+                <td>2019-5-1 To 2019-5-14</td>
+                <td>Kunle</td>
+                <td>Good</td>
+                <td>Approved</td>
+                </tr>
+                </tbody>
+                </table>
+                    
                         </div>
                         )
                     }

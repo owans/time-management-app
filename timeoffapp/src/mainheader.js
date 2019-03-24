@@ -16,10 +16,6 @@ class MainHeader extends React.Component{
                 <Link to="/login" style={{textDecoration:"none"}}>
                 <li className="nav-item">Login</li>
                 </Link>
-
-                <Link to="/employeeheader" style={{textDecoration:"none"}}>
-                <li className="nav-item">Employee</li>
-                </Link>
                 </ul>
             </nav>
             </header>
