@@ -2,20 +2,38 @@ import React from 'react';
 import '../src/App.css';
 import '../src/employee.css';
 import "bootstrap/dist/css/bootstrap.css";
-import Calendar from './Mycalendar';
+import Calendar from 'react-calendar';
 import EmployeeHeader from './employeeheader';
 import Footer from './footer';
 
 const Fullname = 'Owanate Amachree';
 
+const calendarDate = [
+  new Date(2019 , 0, 9), new Date(2019, 1, 23), new Date(2018, 2, 25), new Date(2019, 3, 11)
+]
+const MoreCalendarDate = [
+  new Date(2019 , 0, 9), new Date(2019, 1, 23), new Date(2018, 2, 25), new Date(2019, 3, 11),
+  new Date(2019 , 4, 2), new Date(2019, 5, 13), new Date(2018, 6, 25), new Date(2019, 7, 21),
+  new Date(2019 , 8, 16), new Date(2019, 9, 8), new Date(2018, 10, 30), new Date(2019, 11, 24)
+]
 export default class Dashboard extends React.Component{
+  state = {
+    showMore: false,
+    showMoreText: 'Show More'
+}
+handeleShowMore = () => {
+    this.setState({
+        showMore: !this.state.showMore,
+        showMoreText: 'Show Less'
+    })
+}
     render(){
         return(
             <div>
                 <EmployeeHeader/>
-                    <div  className="ml-3 mt-3">
+                    <div  className="justify-content-between container">
                         <h3 className='text-primary'>{Fullname}</h3>
-                        <h3 className="text-secondary">Statistics</h3>
+                        <p className="text-secondary">Statistics</p>
                     </div>
 
 
@@ -68,14 +86,38 @@ export default class Dashboard extends React.Component{
                       
                       </div>
                     </div>
-                <Calendar/>
+                    <h2 className="text-center mt-4 mb-3 ">
+                    Calendar  <button onClick={this.handeleShowMore} className="btn btn-secondary">{
+                        !this.state.showMore ? 'Show More' : 'Show Less'
+                    }</button> </h2>
+                    <div className="row">
+                   
+                    { !this.state.showMore ?
+                        calendarDate.map((item, index) => {
+                            return <div key={index} className="col-md-3 ">
+                            <Calendar 
+                                value={item}
+                                />
+                            </div>  
+                        }) : MoreCalendarDate.map((item, index) => {
+                            return <div key={index} className="col-md-3 mb-2">
+                            <Calendar
+                                value={item}
+                                />
+                            </div>  
+                        })
+                    }
+      
+
+                    </div>
+                        
                 <div>
-        <div className="d-flex justify-content-between container m-3">
-          <h3 className="text-secondary">All Absences</h3>
+        <div className="d-flex justify-content-center container">
+          <p className="text-secondary">All Absences</p>
         </div>
 
         <div className="d-flex justify-content-center dashboard-absences mx-3">
-        <table class="table table-sm">
+        <table class="table container table-sm">
   <thead>
     <tr>
       

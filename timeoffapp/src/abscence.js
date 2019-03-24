@@ -142,7 +142,7 @@ calculateDuration = (days) => {
                 }
                 {
                      (this.state.leaveType === '' && this.state.showError) ? 
-                     <p className="text-danger">*leave type is required</p> : 
+                     <small className="text-danger">*leave type is required</small> : 
                     ''
                 }
           </div>
@@ -170,7 +170,7 @@ calculateDuration = (days) => {
               {
                 ((this.state.diffStartTimeStopTime === '0 Days' || this.state.diffStartTimeStopTime.includes('-')) 
                 && this.state.showError) ? 
-                <span className="text-danger">invalid duration must be more than 0 Days</span> : '' 
+                <small className="text-danger">invalid duration must be more than 0 Days</small> : '' 
             }              
               </div>
 

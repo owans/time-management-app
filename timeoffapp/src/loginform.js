@@ -87,7 +87,7 @@ class LoginForm extends React.Component{
                     <input type="email" className="form-control"
                           name="email"  noValidate onChange={this.handleChange}/>
                     {this.state.invalidError && (this.state.email === null) ? 
-                    <p className="text-danger">* email is required</p> : '' }
+                    <small className="text-danger">* email is required</small> : '' }
                       {formErrors.email.length > 0 && (
                          <span className="text-danger">{formErrors.email}</span>
               )}
@@ -99,7 +99,7 @@ class LoginForm extends React.Component{
                                     noValidate
                                     onChange={this.handleChange}/>
                        {this.state.invalidError && (this.state.password === null) ? 
-                    <p className="text-danger">* password is required</p> : '' }
+                    <small className="text-danger">* password is required</small> : '' }
                      {formErrors.password.length > 0 && (
                 <span className="text-danger">{formErrors.password}</span>
               )}

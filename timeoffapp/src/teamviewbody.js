@@ -7,12 +7,12 @@ export default class TeamviewBody extends React.Component{
             
         <div>
             <div>
-                        <div className="d-flex justify-content-between container m-3">
+                        <div className="d-flex justify-content-between container">
                         <h6 className="text-primary">Leave Request to Approve</h6>
                         </div>
 
                         <div>
-                        <table class="table">
+                        <table class="table container">
                         <thead>
                         <tr>
                         <th scope="col">Employee</th>
@@ -66,11 +66,11 @@ export default class TeamviewBody extends React.Component{
 
                         </div>
                             </div>
-              <div className="d-flex justify-content-between container m-3">
+              <div className="d-flex justify-content-between container">
                 <h6 className="text-primary">Approved Request</h6>
                 </div>
 
-                <table class="table font">
+                <table class="table font container">
                 <thead>
                 <tr>
                     <th scope="col">Employee</th>

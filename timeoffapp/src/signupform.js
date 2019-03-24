@@ -135,7 +135,7 @@ class SignUpForm extends React.Component{
                     <input type="text" className="form-control" 
                           name="companyName"  noValidate onChange={this.handleChange}/>
                     {this.state.invaildError && (this.state.companyName === null) ? 
-                    <p className="text-danger">* Please input name of company</p> : '' } 
+                    <small className="text-danger">* Please input name of company</small> : '' } 
                     {(<span className="text-danger">{formErrors.companyName}</span>)}
                    </div>
                    <div className="form-group">
@@ -143,7 +143,7 @@ class SignUpForm extends React.Component{
                     <input type="text" className="form-control" 
                           name="firstName"  noValidate onChange={this.handleChange}/>
                         {this.state.invaildError && (this.state.firstName === null) ? 
-                    <p className="text-danger">* Please input your first name</p> : '' } 
+                    <small className="text-danger">* Please input your first name</small> : '' } 
                       {formErrors.firstName.length > 0 && (
                          <span className="text-danger">{formErrors.firstName}</span>)}
                    </div>
@@ -152,7 +152,7 @@ class SignUpForm extends React.Component{
                     <input type="text" className="form-control" 
                           name="lastName"  noValidate onChange={this.handleChange}/>
                     {this.state.invaildError && (this.state.lastName === null) ? 
-                    <p className="text-danger">* Your last name is needed</p> : '' } 
+                    <small className="text-danger">* Your last name is needed</small> : '' } 
                       {formErrors.lastName.length > 0 && (
                          <span className="text-danger">{formErrors.lastName}</span>
               )}
@@ -162,7 +162,7 @@ class SignUpForm extends React.Component{
                     <input type="email" className="form-control" placeholder="you@email.com"
                           name="email"  noValidate onChange={this.handleChange}/>
                     {this.state.invaildError && (this.state.email === null) ? 
-                    <p className="text-danger">* please input a valid email</p> : '' } 
+                    <small className="text-danger">* please input a valid email</small> : '' } 
                       {formErrors.email.length > 0 && (
                          <span className="text-danger">{formErrors.email}</span>
               )}
@@ -175,7 +175,7 @@ class SignUpForm extends React.Component{
                     <input type="text" className="form-control" 
                           name="department"  noValidate onChange={this.handleChange}/>
                     {this.state.invaildError && (this.state.department === null) ? 
-                    <p className="text-danger">* Please input department</p> : '' } 
+                    <small className="text-danger">* Please input department</small> : '' } 
                       {formErrors.department.length > 0 && (
                          <span className="text-danger">{formErrors.department}</span>
               )}
@@ -186,7 +186,7 @@ class SignUpForm extends React.Component{
                     <input type="date" className="form-control"   
                           name="dob"  noValidate onChange={this.handleChange}/>
                     {this.state.invaildError && (this.state.dob === null) ? 
-                    <p className="text-danger">* Please input date of birth</p> : '' } 
+                    <small className="text-danger">* Please input date of birth</small> : '' } 
                       {formErrors.dob.length > 0 && (
                          <span className="text-danger">{formErrors.dob}</span>
               )}
@@ -197,7 +197,7 @@ class SignUpForm extends React.Component{
                     <input type="text" className="form-control"
                           name="manager"  noValidate onChange={this.handleChange}/>
                     {this.state.invaildError && (this.state.manager === null) ? 
-                    <p className="text-danger">* Please fill in your manager's name</p> : '' } 
+                    <small className="text-danger">* Please fill in your manager's name</small> : '' } 
                       {formErrors.manager.length > 0 && (
                          <span className="text-danger">{formErrors.manager}</span>
               )}
@@ -210,7 +210,7 @@ class SignUpForm extends React.Component{
                                     noValidate
                                     onChange={this.handleChange}/>
                     {this.state.invaildError && (this.state.password === null) ? 
-                    <p className="text-danger">* Please fill in password. Be careful!</p> : '' } 
+                    <small className="text-danger">* Please fill in password. Be careful!</small> : '' } 
                      {formErrors.password.length > 0 && (
                 <span className="text-danger">{formErrors.password}</span>
               )}
