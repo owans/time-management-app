@@ -2,8 +2,6 @@ import React,{Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './employee.css';
 import './App.css';
-// import Calendar from './Mycalendar';
-// import Table from './table';
 
 
 class EmployeeBody extends Component{

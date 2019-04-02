@@ -138,7 +138,7 @@ calculateDuration = (days) => {
             </select>
             {
                     (this.state.leaveType !== 'Select Leave Type') ? '' : 
-                    <p className="text-danger">choose a valid leave type</p>
+                    <small className="text-danger">choose a valid leave type</small>
                 }
                 {
                      (this.state.leaveType === '' && this.state.showError) ? 

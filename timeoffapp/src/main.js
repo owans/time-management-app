@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './index.css';
 import './App.css';
+// import 'jquery/dist/jquery.min';
+// import 'popper.js/dist/popper.min';
+// import 'bootstrap/dist/js/bootstrap.bundle.min';
 import {Route, Switch} from 'react-router-dom';
 import Home from './home';
 import Login from './login';

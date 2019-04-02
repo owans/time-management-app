@@ -31,13 +31,14 @@ handeleShowMore = () => {
         return(
             <div>
                 <EmployeeHeader/>
-                    <div  className="justify-content-between container">
-                        <h3 className='text-primary'>{Fullname}</h3>
-                        <p className="text-secondary">Statistics</p>
+                    <div  className="justify-content-center container">
+                        <h2 className='text-primary'>{Fullname}</h2>
+                        
                     </div>
 
 
                     <div className="container">
+                    <h3 className="text-secondary">Statistics</h3>
                     <div className="row p mt-5 statistics">
                         <div className="col-md-3 sta">
                         <div className="card">
@@ -86,21 +87,21 @@ handeleShowMore = () => {
                       
                       </div>
                     </div>
-                    <h2 className="text-center mt-4 mb-3 ">
+                    <h3 className="container text-secondary mt-4 mb-3 ">
                     Calendar  <button onClick={this.handeleShowMore} className="btn btn-secondary">{
                         !this.state.showMore ? 'Show More' : 'Show Less'
-                    }</button> </h2>
+                    }</button> </h3>
                     <div className="row">
                    
                     { !this.state.showMore ?
                         calendarDate.map((item, index) => {
-                            return <div key={index} className="col-md-3 ">
+                            return <div key={index} className="col-sm-3 container">
                             <Calendar 
                                 value={item}
                                 />
                             </div>  
                         }) : MoreCalendarDate.map((item, index) => {
-                            return <div key={index} className="col-md-3 mb-2">
+                            return <div key={index} className="col-sm-3 mb-2 container">
                             <Calendar
                                 value={item}
                                 />
@@ -112,12 +113,12 @@ handeleShowMore = () => {
                     </div>
                         
                 <div>
-        <div className="d-flex justify-content-center container">
-          <p className="text-secondary">All Absences</p>
+        <div className="d-flex justify-content-between ml-3">
+          <h3 className="head text-secondary container">All Absences</h3>
         </div>
 
         <div className="d-flex justify-content-center dashboard-absences mx-3">
-        <table class="table container table-sm">
+        <table class="table container responsive table-sm">
   <thead>
     <tr>
       
@@ -135,7 +136,7 @@ handeleShowMore = () => {
       <td>10</td>
       <td>2021-1-15 - 2021-1-25</td>
       <td>Approved</td>
-      <td><button><i class="fas fa-trash-alt"></i></button></td>
+      <td><button><i class="fas fa-trash-alt delete"></i></button></td>
       <td>Kunle</td>
     </tr>
 
@@ -144,7 +145,7 @@ handeleShowMore = () => {
       <td>5</td>
       <td>2019-3-22 - 2019-3-27</td>
       <td>Pending</td>
-      <td><button><i class="fas fa-trash-alt"></i></button></td>
+      <td><button><i class="fas fa-trash-alt delete"></i></button></td>
       <td>Mayowa</td>
     </tr>
 
@@ -153,7 +154,7 @@ handeleShowMore = () => {
       <td>10</td>
       <td>2019-4-5 - 2019-4-15</td>
       <td>Pending</td>
-      <td><button><i class="fas fa-trash-alt"></i></button></td>
+      <td><button><i class="fas fa-trash-alt delete"></i></button></td>
       <td>Kunle</td>
     </tr>
     <tr>
@@ -162,7 +163,7 @@ handeleShowMore = () => {
       <td>14</td>
       <td>2019-5-01 - 2019-5-15</td>
       <td>Pending</td>
-      <td><button><i class="fas fa-trash-alt"></i></button></td>
+      <td><button><i class="fas fa-trash-alt delete"></i></button></td>
       <td>Mayowa</td>
     </tr>
   </tbody>

@@ -1,4 +1,5 @@
 import React from 'react';
+import '../src/App.css';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Link} from 'react-router-dom';
@@ -65,7 +66,7 @@ class SignUpForm extends React.Component{
             Email: ${this.state.email}
             Password: ${this.state.password}
           `);
-          alert('Congratulations, you successfully registered')
+          // alert('Congratulations, you successfully registered')
         } else {
           this.setState({invaildError: true})
         }
@@ -125,9 +126,7 @@ class SignUpForm extends React.Component{
     render() {
         const { formErrors } = this.state;
         return(
-            <div>
-                <div className="">
-                </div>
+            <div className="signup-container">
                 <form className="container mb-5" onSubmit={this.handleSubmit} noValidate style={{padding: '2% 20%' }}>
                     <div className="">
                     <div className="form-group">

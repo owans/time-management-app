@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import {Link} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
+// import swal from '@sweetalert/with-react';
 
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -45,7 +46,7 @@ class LoginForm extends React.Component{
           user = JSON.stringify(user)
           console.log(user)
           localStorage.setItem('currentUser', user)
-          alert('you succesfully logged in')
+          // alert('you succesfully logged in')
 
         } else {
           this.setState({invalidError: true})
@@ -77,9 +78,8 @@ class LoginForm extends React.Component{
     render() {
         const { formErrors } = this.state;
         return(
-            <div>
-                <div className="text-center">
-                </div>
+            <div className="login-container">
+                
                 <form className="container mb-5" onSubmit={this.handleSubmit} noValidate style={{padding: '2% 20%' }}>
                     <div className="">
                     <div className="form-group">
