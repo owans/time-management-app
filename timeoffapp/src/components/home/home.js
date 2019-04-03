@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import MainHeader from './mainheader';
-import HomeBody from './homebody';
-import Footer from './footer';
-import '../src/App.css';
+import MainHeader from '../common/mainheader';
+import HomeBody from '../home/homebody';
+import Footer from '../footer/footer';
+import '../styles/App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 

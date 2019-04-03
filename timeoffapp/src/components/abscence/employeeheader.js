@@ -1,10 +1,10 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 // import './App.css';
-import './employee.css';
+import '../styles/employee.css';
 import {Link} from 'react-router-dom';
-import Footer from './footer';
-import Welcome from './welcomeemployee';
+import Footer from '../footer/footer';
+import Welcome from '../welcomeemployee/welcomeemployee';
 
 
 const User = "Owans";

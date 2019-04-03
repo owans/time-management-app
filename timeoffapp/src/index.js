@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import '../src/components/styles/index.css';
 import Main from './main';
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter as Router } from 'react-router-dom'

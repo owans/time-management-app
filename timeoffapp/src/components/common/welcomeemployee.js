@@ -1,7 +1,7 @@
 import React from 'react';
-import '../src/App.css';
+import '../styles/App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import profile from '../src/profile.svg';
+import profile from '../welcomeemployee/profile.svg';
 
 
 export default class Welcome extends React.Component{

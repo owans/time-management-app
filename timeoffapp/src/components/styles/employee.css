@@ -1,0 +1,44 @@
+body{
+  background: #fefefe!important;
+}
+
+.grid h2,h4{
+  color: #296484;
+}
+
+.grid h3, p{
+  text-align: center;
+  color: #296484;
+}
+
+  .grid-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    background-color: #AAABBB;
+    color: #296484;
+  }
+
+  .grid-wrapper p{
+    color: #fefefe;
+  }
+  
+  .calendar-grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #fefefe;
+    margin-top: 20px;
+  }
+
+  .buttoncolumn {
+    width: 100px
+  }
+
+  .fas{
+    background-color: #296484;
+  }

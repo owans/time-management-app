@@ -1,10 +1,10 @@
 import React from 'react';
-import '../src/App.css';
-import '../src/employee.css';
+import '../styles/App.css';
+import '../styles/employee.css';
 import "bootstrap/dist/css/bootstrap.css";
 import Calendar from 'react-calendar';
-import EmployeeHeader from './employeeheader';
-import Footer from './footer';
+import EmployeeHeader from '../common/employeeheader';
+import Footer from '../footer/footer';
 
 const Fullname = 'Owanate Amachree';
 

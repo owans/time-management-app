@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import './index.css';
-import './App.css';
+import '../src/components/styles/index.css';
+import '../src/components/styles/App.css';
 // import 'jquery/dist/jquery.min';
 // import 'popper.js/dist/popper.min';
 // import 'bootstrap/dist/js/bootstrap.bundle.min';
 import {Route, Switch} from 'react-router-dom';
-import Home from './home';
-import Login from './login';
-import TeamView from './teamview';
-import Abscence from './abscence';
+import Home from '../src/components/home/home';
+import Login from '../src/components/login/login';
+import TeamView from '../src/components/teamview/teamview';
+import Abscence from '../src/components/abscence/abscence';
 // import Employee from './employee';
-import SignUp from './signup';
-import EmployeeHeader from './employeeheader';
-import NotFound from './notfound';
-import Dashboard from './dashboard';
+import SignUp from '../src/components/signup/signup';
+import EmployeeHeader from '../src/components/common/employeeheader';
+import NotFound from '../src/components/notfound/notfound';
+import Dashboard from '../src/components/dashboard/dashboard';
 
 class Main extends Component{
     render(){

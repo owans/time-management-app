@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import EmployeeHeader from './employeeheader';
+import EmployeeHeader from '../common/employeeheader';
 
 const FillForm = `please fill out an absence form, if any. Thank You`;
 

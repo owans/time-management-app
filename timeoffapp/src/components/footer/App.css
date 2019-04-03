@@ -1,0 +1,235 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link{
+  color: white;
+  text-decoration: none;font-size: 14px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.nav-link:hover{
+  text-decoration: none;
+  color: white;
+  opacity: 0.7;
+}
+
+.btn-absence{
+  background-color: white;
+  padding: 7px 15px;
+  color: #2e9cca;
+}
+
+.btn-absence:hover{
+  opacity: 0.8;
+  background-color: white;
+  color: #29648A
+}
+
+.navbar-brand{
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.navbar-brand:hover{
+  color: white;
+}
+
+.navbar-button{
+  padding: 0px 15px;
+  border: 1px solid white;
+  border-radius: 50px;
+}
+
+.navbar-button:hover{
+  opacity: 0.7;
+  border: 1px solid #29648A;
+}
+
+.header-sup{
+  font-size: 14px;
+  color: white;
+}
+
+.navbar{
+  padding-top: 20px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  background-color: #2e9cca;
+}
+
+ 
+.bodyContainer{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  align-items: flex-start;
+  text-align: start;
+  line-height: 20px;
+  padding: 10px;
+  margin-top: 50px;
+  background-color: #29648A;
+  /* opacity: 0.3; */
+  color: #fefefe;
+}
+
+.bodyContainer>.image{
+  flex: 1 0 0%;
+  text-align: right;
+}
+
+.image>img{
+  vertical-align: top;
+  max-width: 100%;
+  max-height: 300px;
+}
+
+.bodyContainer>.text{
+  flex: 2 0 0%;
+  margin: auto 0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.signup-container{
+  margin-top: 50px;
+}
+
+.login-container{
+  margin-top: 50px;
+}
+
+.welcome-container{
+  margin-top: 50px;
+}
+
+.flex-footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: #fefefe;
+  background: #2e9cca;
+}
+  
+
+  .bodyContainer button{
+  width: 100px;
+  margin: auto;
+  padding: 10px;
+  font-size: 20px;
+  border: 10px;
+  background: #AAABBB;
+  color: #29648A;
+  border-radius: 20px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.bodyContainer button:hover{
+  background: #fefefe;
+}
+
+#register, #login {
+  width: 300px;
+  border: 1px solid #d6d7da;
+  padding: 0px 15px 15px 15px;
+  border-radius: 5px;
+  font-family: arial;
+  line-height: 16px;
+  color: #333333;
+  font-size: 14px;
+  background: #ffffff;
+  margin: 100px auto;
+}
+
+form label, form input {
+  display: block;
+  margin-bottom: 10px;
+  width: 90%
+}
+
+form input {
+  padding: 10px;
+  border: solid 1px #BDC7D8;
+
+}
+
+.button {
+  background-color: #00BFFF;
+  border-color: #3ac162;
+  font-weight: bold;
+  padding: 12px 15px;
+  color: #ffffff;
+}
+
+.user-photo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-photo > img{
+  width: 100px;
+  height: 80px;
+  border-radius: 120px;
+  margin: auto;
+  margin-top: 50px;
+  position: relative;
+}
+
+.fa-bars, .fas{
+  color: #fefefe!important;
+}
+
+.fab, .fa-facebook-f, .fa-github{
+  margin-right: 20px;
+  cursor: pointer;
+  color: #fefefe;
+}
+
+.fab .fa-twitter{
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+
+@media only screen and (min-device-width: 250px) and (max-device-width: 800px){
+.navbar {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #2e9cca;
+}
+
+.bodyContainer>.image{
+  max-width: 70;
+}
+
+.bodyContainer>.text>h2{
+  font-size: 10px;
+  text-align: center;
+}
+
+.bodyContainer>.text>h3{
+  font-size: 10px;
+  text-align: center;
+}
+
+.bodyContainer>.text>h1{
+  margin-top: 30px;
+  font-size: 20px;
+  text-align: center;
+}
+}

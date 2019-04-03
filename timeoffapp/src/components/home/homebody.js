@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
-import manage from './manage.svg';
+import '../styles/App.css';
+import manage from '../home/manage.svg';
 import {Link} from 'react-router-dom';
 
 class HomeBody extends React.Component{

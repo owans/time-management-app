@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import pagenotfound from '../src/pagenotfound.svg';
+import pagenotfound from '../notfound/pagenotfound.svg';
 
 export default class NotFound extends Component{
     render(){

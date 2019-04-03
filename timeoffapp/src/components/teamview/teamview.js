@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import EmployeeHeader from './employeeheader';
-import TeamviewBody from './teamviewbody';
-import Footer from './footer';
+import EmployeeHeader from '../common/employeeheader';
+import TeamviewBody from '../teamview/teamviewbody';
+import Footer from '../footer/footer';
 
 
 const Welcome = `You're in Teams`;

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../src/App.css';
+import '../styles/App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Link} from 'react-router-dom';
 

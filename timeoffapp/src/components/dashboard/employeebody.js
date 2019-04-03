@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import './employee.css';
-import './App.css';
+import '../styles/employee.css';
+import '../styles/App.css';
 
 
 class EmployeeBody extends Component{
