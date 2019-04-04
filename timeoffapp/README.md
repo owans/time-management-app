@@ -1,6 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
+This project can also be accessed by the express server using http://localhost:3030
 
 In the project directory, you can run:
 
