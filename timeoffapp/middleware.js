@@ -13,8 +13,9 @@ const externalRequest = (req, res) =>{
         })
         .on('end', ()=>{
             const parsed = JSON.parse(body);
-            //change parsed object to JSON
+            
             res.write(JSON.stringify(parsed));
+            
             res.end();
         })
     })

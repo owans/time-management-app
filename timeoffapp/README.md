@@ -1,5 +1,8 @@
 This project can also be accessed by the express server using http://localhost:3030
 
+make a get request for public holidays in Nigeria using the route /holidays
+on http://localhost:3030/holidays
+
 In the project directory, you can run:
 
 ### `npm start`
