@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/App.css';
 import {Link} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
+import axios from "axios";
 // import swal from '@sweetalert/with-react';
 
 const emailRegex = RegExp(
@@ -37,20 +38,36 @@ class LoginForm extends React.Component{
           }
         };
       }
+
+
+      componentDidMount(){
+        const token = localStorage.getItem("blog-token");
+
+        if(token) return this.props.history.push("/dashboard");
+    }
+
     
-      handleSubmit = e => {
+      async handleSubmit (e) {
+
         e.preventDefault();
     
-        if (formValid(this.state)) {
-          let user = {email: this.state.email, password: this.state.password}
-          user = JSON.stringify(user)
-          console.log(user)
-          localStorage.setItem('currentUser', user)
-          // alert('you succesfully logged in')
+        try{
+          if (formValid(this.state)) {
+            let user = {email: this.state.email, password: this.state.password}
+           
+            const res = await axios.post('http://localhost:5000/user/login', user)
+            const token = res.data.data.token;
 
-        } else {
-          this.setState({invalidError: true})
-         
+            localStorage.setItem("blog-token", token);
+
+            this.props.history.push("/dashboard");
+  
+          } else {
+            this.setState({invalidError: true})
+           
+          }
+        }catch(err){
+          console.log("An error occured", err.response);
         }
       };
     

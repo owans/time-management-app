@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/App.css';
 import '../styles/index.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import axios from "axios";
 import {Link} from 'react-router-dom';
 
 
@@ -38,7 +39,10 @@ class SignUpForm extends React.Component{
           email: null,
           department: null,
           dob: null,
+          age: null,
           manager: null,
+          country: null,
+          timezone: null,
           password: null,
           invaildError: false,
           formErrors: {
@@ -53,25 +57,35 @@ class SignUpForm extends React.Component{
           }
         };
       }
+
+      componentDidMount(){
+        const token = localStorage.getItem("blog-token");
+
+        if(token) return this.props.history.push("/dashboard");
+    }
+
     
-      handleSubmit = e => {
+      async handleSubmit (e){
         e.preventDefault();
-        
-        if (formValid(this.state)) {
-          console.log(`
-            --On Submission--
-           Company Name: ${this.state.companyName}
-            First Name: ${this.state.firstName}
-            Last Name: ${this.state.lastName}
-            Email: ${this.state.email}
-            Password: ${this.state.password}
-          `);
-          // alert('Congratulations, you successfully registered')
-        } else {
-          this.setState({invaildError: true})
-        }
-      };
     
+        try{
+          if (formValid(this.state)) {
+            const res = await axios.post("http://localhost:5000/user", this.state);
+
+            const token = res.data.data.token;
+
+            localStorage.setItem("blog-token", token);
+
+            this.props.history.push("/dashboard");
+          }
+          
+        }catch(err){
+          console.log("An error occured", err.response);
+        }
+      
+      }
+  
+
       handleChange = e => {
         e.preventDefault();
         const { name, value } = e.target;
@@ -123,13 +137,6 @@ class SignUpForm extends React.Component{
     
         this.setState({ formErrors, [name]: value }, () => console.log(this.state));
       };
-
-      componentDidMount(){
-        const token = localStorage.getItem("blog-token");
-
-        if(token) return this.props.history.push("/profile");
-    }
-
     render() {
         const { formErrors } = this.state;
         return(
