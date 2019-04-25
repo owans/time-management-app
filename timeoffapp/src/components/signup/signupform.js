@@ -56,7 +56,7 @@ class SignUpForm extends React.Component{
     
       handleSubmit = e => {
         e.preventDefault();
-    
+        
         if (formValid(this.state)) {
           console.log(`
             --On Submission--
@@ -123,6 +123,13 @@ class SignUpForm extends React.Component{
     
         this.setState({ formErrors, [name]: value }, () => console.log(this.state));
       };
+
+      componentDidMount(){
+        const token = localStorage.getItem("blog-token");
+
+        if(token) return this.props.history.push("/profile");
+    }
+
     render() {
         const { formErrors } = this.state;
         return(
@@ -132,7 +139,7 @@ class SignUpForm extends React.Component{
                     <div className="form-group">
                     <label >Company Name</label>
                     <input type="text" className="form-control" 
-                          name="companyName"  noValidate onChange={this.handleChange}/>
+                          name="company_name"  noValidate onChange={this.handleChange}/>
                     {this.state.invaildError && (this.state.companyName === null) ? 
                     <small className="text-danger">* Please input name of company</small> : '' } 
                     {(<span className="text-danger">{formErrors.companyName}</span>)}
@@ -140,7 +147,7 @@ class SignUpForm extends React.Component{
                    <div className="form-group">
                     <label >First Name</label>
                     <input type="text" className="form-control" 
-                          name="firstName"  noValidate onChange={this.handleChange}/>
+                          name="first_name"  noValidate onChange={this.handleChange}/>
                         {this.state.invaildError && (this.state.firstName === null) ? 
                     <small className="text-danger">* Please input your first name</small> : '' } 
                       {formErrors.firstName.length > 0 && (
@@ -149,7 +156,7 @@ class SignUpForm extends React.Component{
                    <div className="form-group">
                     <label >Last Name</label>
                     <input type="text" className="form-control" 
-                          name="lastName"  noValidate onChange={this.handleChange}/>
+                          name="last_name"  noValidate onChange={this.handleChange}/>
                     {this.state.invaildError && (this.state.lastName === null) ? 
                     <small className="text-danger">* Your last name is needed</small> : '' } 
                       {formErrors.lastName.length > 0 && (
@@ -216,14 +223,14 @@ class SignUpForm extends React.Component{
                 </div>
                 <div className="form-group">
                     <label >Country</label>
-                    <select className="form-control" id="sel1">
+                    <select className="form-control" name="country" id="sel1">
                         <option>Nigeria</option>
                     </select>
                     </div>
                     <div className="form-group">
-                    <label >Time-Zone</label>
-                    <select className="form-control" id="sel1">
-                        <option>West Africa/ Lagos</option>
+                    <label>Time Zone</label>
+                    <select className="form-control" name="timezone" id="sel1">
+                        <option>West Africa/Lagos</option>
                     </select>
                     </div>
             

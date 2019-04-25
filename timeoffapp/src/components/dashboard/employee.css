@@ -42,3 +42,14 @@ body{
   .fas{
     background-color: #296484;
   }
+
+  .statistics .sta .card {
+    height: 250px !important;
+    width: 100px!important;
+}
+.statistics .card-header{
+    font-weight: bold;
+}
+.col-md-3 .react-calendar {
+    max-height: 240px !important;
+}

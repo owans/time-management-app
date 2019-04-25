@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
+import "./employee.css";
+import "./App.css";
 import 'bootstrap/dist/css/bootstrap.css';
-import EmployeeHeader from '../common/employeeheader';
+import EmployeeHeader from './employeeheader';
+import Swal from 'sweetalert2';
+
 
 const FillForm = `please fill out an absence form, if any. Thank You`;
 
@@ -13,6 +17,7 @@ const leaveType = [
   {name: 'Vacation', days: 5},
   {name: 'Others', days: 5},
 ]
+
 
 let date = new Date();
 date = `${date.getFullYear()}-0${date.getMonth() + 1 }-${date.getDate()}`
@@ -59,7 +64,11 @@ hamdleFormSubmit = () => {
   if ((!this.state.diffStartTimeStopTime.includes('-') && this.state.diffStartTimeStopTime !== '0 Days') && 
       this.state.leaveType !== '-- Select Leave Type --') {
       console.log(this.state.diffStartTimeStopTime)
-      alert('saved wait for approval')
+      Swal.fire(
+        'Success',
+        'Your Leave Request Has Being Submitted',
+        'success'
+      )
   } else {
       this.setState({showError: true})
   } 
@@ -106,7 +115,6 @@ calculateDuration = (days) => {
     if (month === not && weeks && day) {
       result = `${weeks} Week ${day} Day`
     }
-    // result = `${month} Month ${weeks} Week ${day} Day`
     return result
 }
 
@@ -116,7 +124,7 @@ calculateDuration = (days) => {
       <div>
       <EmployeeHeader/>
         <p>{FillForm}</p>
-        <div className="container">
+        <div className="container abscence">
         <form name="form" method="post" action="thanks for filling out the abscence form">
         <fieldset>
           <div className="form-container-request">
@@ -128,13 +136,6 @@ calculateDuration = (days) => {
                             return <option key={index}>{item.name}</option>
                         })
                     }
-             
-              {/* <option value="">please select timeoff type</option>
-              <option value="maternity">Maternity</option>
-              <option value="timeoff">TimeOff</option>
-              <option value="vacation">Holiday</option>
-              <option value="sickleave">Health</option>
-              <option value="others">Others</option> */}
             </select>
             {
                     (this.state.leaveType !== 'Select Leave Type') ? '' : 
@@ -186,7 +187,7 @@ calculateDuration = (days) => {
 
                 <div>
                     <button type="submit" onClick={this.hamdleFormSubmit}
-                    className="my-1 btn btn-primary btn-lg">
+                    className="my-1 btn btn-primary btn-sm align-center">
                     Submit Form
                     </button> 
                 </div>

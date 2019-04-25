@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../styles/employee.css';
 import {Link} from 'react-router-dom';
 import Footer from '../footer/footer';
-import Welcome from '../welcomeemployee/welcomeemployee';
+// import Welcome from '../welcomeemployee/welcomeemployee';
 
 
 const User = "Owans";
@@ -38,23 +38,7 @@ class EmployeeHeader extends React.Component{
   </div>
 </nav>
 
-
-            {/* <nav className="navbar  navbar-expand-lg">
-                <Link to="/" style={{textDecoration:"none"}}><a href="/" className="logo navbar-brand">OwaTimer</a></Link>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <i className="fas fa-bars"></i>
-                <i className="fas fa-bars"></i>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="nav-links navbar-nav ml-auto">
-                <Link  to="/dashboard" className="link" style={{textDecoration:"none"}}><li className="nav-item nav-items text-center padtb5">Dashboard</li></Link>
-                <Link  to="/teamview" className="link" style={{textDecoration:"none"}}><li className="nav-item nav-items text-center padtb5">TeamView</li></Link>
-                <Link  to="/abscence" className="link" style={{textDecoration:"none"}}><li className="nav-item nav-items text-center padtb5">New Abscence</li></Link>
-                <Link  to="/login" className="link" style={{textDecoration:"none"}}><li className="nav-item nav-items text-center padtb5">LogOut</li></Link>
-                </ul>
-                </div>
-            </nav> */}
-            <Welcome/>
+            {/* <Welcome/> */}
             <p>{WelcomeUser}</p>
             <Footer/>
             </div>

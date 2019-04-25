@@ -8,6 +8,20 @@ import Footer from '../footer/footer';
 
 const Fullname = 'Owanate Amachree';
 
+const typeOfTimeOff = [
+  {name: 'Vacation', days: 2},
+  {name: 'Maternity Leave', days: 10},
+  {name: 'Medical', days: 5},
+  {name: 'Marriage', days: 7},
+]
+
+const employeeDetail = {name: 'Kunle Lawal', department: 'Software Engineering', position: 'Manager'}
+const requests = [
+    {name: 'Sick Leave', date: '12/03/2019'},
+    {name: 'Maternity Leave', date: '23/02/2019'},
+    {name: 'Study Leave', date: '14/01/2019'},
+]
+
 const calendarDate = [
   new Date(2019 , 0, 9), new Date(2019, 1, 23), new Date(2018, 2, 25), new Date(2019, 3, 11)
 ]
@@ -54,9 +68,16 @@ handeleShowMore = () => {
                         <div className="card">
                             <div className="card-header bg-secondary text-light">Used so far</div>
                             <div className="card-body">
-                                <h6>Sick leave</h6>
-                                <h6>Study leave</h6>
-                                <h6>Travel</h6>
+                            <ul className="list-group"> 
+                                {
+                                typeOfTimeOff.map((item , index) => {
+                                        return <div key={index}>
+                                            <li  className="list-group-item"> {item.name} 
+                                                <span className="badge badge-primary float-right ">{item.days}</span></li>
+                                            </div>
+                                })
+                                }
+                            </ul>
                             </div> 
                         </div>
                         </div>
@@ -66,9 +87,16 @@ handeleShowMore = () => {
                         <div className="card">
                             <div className="card-header bg-secondary text-light">Available Types</div>
                             <div className="card-body">
-                                <h6>Sick Leave:................3/10</h6>
-                                <h6>Study Leave:..............2/10</h6>
-                                <h6>Holiday:......................3/10</h6>
+                            <ul className="list-group"> 
+                                {
+                                requests.map(item => {
+                                        return <div key={item.date}>
+                                            <li className="list-group-item"> {item.name} 
+                                                <span className="badge badge-primary float-right ">{item.date}</span></li>
+                                            </div>
+                                })
+                                }
+                            </ul>
                             </div> 
                         </div>
                         </div>
@@ -76,10 +104,13 @@ handeleShowMore = () => {
                         <div className="col-md-3 sta">
                         <div className="card">
                             <div className="card-header bg-secondary text-light">Details</div>
-                            <div className="card-body">
-                                <h6>Supervisor: Kunle</h6>
-                                <h6>Department: LevelUp Academy</h6>
-                                <h6>Allowance in 2019:....3</h6>
+                            <div className="card-body text-center">
+                            <i className="fa fa-user-circle-o fa-3x "></i>
+                                <div className="mt-2">
+                                    <h6>Name: {employeeDetail.name}</h6>
+                                    <h6>Department: {employeeDetail.department}</h6>
+                                    <h6>Position: {employeeDetail.position}</h6>
+                                </div>
                             </div> 
                         </div>
                         </div>
@@ -95,13 +126,13 @@ handeleShowMore = () => {
                    
                     { !this.state.showMore ?
                         calendarDate.map((item, index) => {
-                            return <div key={index} className="col-sm-3 container">
+                            return <div key={index} className="col-md-3">
                             <Calendar 
                                 value={item}
                                 />
                             </div>  
                         }) : MoreCalendarDate.map((item, index) => {
-                            return <div key={index} className="col-sm-3 mb-2 container">
+                            return <div key={index} className="col-md-3 mb-2">
                             <Calendar
                                 value={item}
                                 />

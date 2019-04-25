@@ -139,7 +139,7 @@ html {
   background: #fefefe;
 }
 
-#register, #login {
+#register, #login , #abscence{
   width: 300px;
   border: 1px solid #d6d7da;
   padding: 0px 15px 15px 15px;
