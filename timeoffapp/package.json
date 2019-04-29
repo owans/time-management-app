@@ -26,6 +26,9 @@
     "eject": "react-scripts eject",
     "server": "node server.js"
   },
+
+  "heroku-run-build-script": true,
+
   "eslintConfig": {
     "extends": "react-app"
   },
