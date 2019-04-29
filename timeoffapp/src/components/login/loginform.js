@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/App.css';
 import {Link, withRouter} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
+import env from "../../env";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -58,7 +59,7 @@ class LoginForm extends React.Component{
 
             let user = {email: this.state.email, password: this.state.password}
            
-            const res = await axios.post('http://localhost:5000/user/login', user)
+            const res = await axios.post(`${env.api}/user/login`, user)
             const token = res.data.data.token;
 
             localStorage.setItem("owatimer-token", token);

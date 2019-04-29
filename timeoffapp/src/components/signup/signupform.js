@@ -3,6 +3,7 @@ import '../styles/App.css';
 import '../styles/index.css';
 import {withRouter} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
+import env from "../../env";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -83,7 +84,7 @@ class SignUpForm extends React.Component{
             password: this.state.password,
           }
          
-          const res = await axios.post('http://localhost:5000/user', user)
+          const res = await axios.post(`${env.api}/user`, user)
 
           const token = res.data.data.token;
 
