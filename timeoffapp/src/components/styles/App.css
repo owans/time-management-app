@@ -233,3 +233,26 @@ form input {
   text-align: center;
 }
 }
+
+.custom-toast {
+  background: rgb(241, 188, 188);
+  color: white;
+  border-radius: 8px;
+  text-align: center;
+  width: 160px;
+  padding: 20px;
+  right: 20px;
+  position: absolute;
+  top: 160px;
+  animation: slideDown 1s;
+}
+
+@keyframes slideDown {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: 160px;
+  }
+}

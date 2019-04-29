@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../src/components/styles/index.css';
 import '../src/components/styles/App.css';
 import {Route, Switch} from 'react-router-dom';
+import MainHeader from '././components/common/mainheader';
+import Footer from '././components/common/footer';
 import Home from './components/home/home';
 import Login from './components/login/login';
 import TeamView from './components/teamview/teamview';
@@ -15,6 +17,7 @@ class App extends Component{
     render(){
     return (
       <React.Fragment>
+        <MainHeader/>
         <Switch>
               <Route exact path="/" component={Home}></Route>
               <Route exact path="/login" component={Login}></Route>
@@ -25,6 +28,7 @@ class App extends Component{
               <Route exact path="/dashboard" component={Dashboard}></Route>
               <Route component={NotFound}></Route>
         </Switch>
+        <Footer/>
       </React.Fragment>
     );
   }

@@ -41,6 +41,12 @@ class LoginForm extends React.Component{
 
       return !!errors;
     }
+
+    showError(){
+      this.setState({invalidError: true})
+
+      setTimeout(() => this.setState({invalidError: false}),2000)
+    }
     
       async handleSubmit (e) {
 
@@ -48,7 +54,7 @@ class LoginForm extends React.Component{
     
         try{
           if(this.doesFormHaveErrors()) 
-          return this.setState({invalidError: true});
+          return this.showError();
 
             let user = {email: this.state.email, password: this.state.password}
            
@@ -92,60 +98,59 @@ class LoginForm extends React.Component{
         const { formErrors } = this.state;
         return(
             <div className="login-container">
-                
+                {
+                  // eslint-disable-next-line jsx-a11y/accessible-emoji
+                  this.state.invalidError && <p className="custom-toast">oops😒an error occured</p>
+                }
                 <form className="container mb-5" onSubmit={this.handleSubmit} noValidate style={{padding: '2% 20%' }}>
-                    <div className="">
-                    <div className="form-group">
-                    <label >Email address</label>
-                    <input type="email" className="form-control"
+                  <div className="">
+                      <div className="form-group">
+                        <label >Email address</label>
+                          <input type="email" className="form-control"
                           name="email"  noValidate onChange={this.handleChange}/>
-                    {this.state.invalidError && (this.state.email === null) ? 
-                    <small className="text-danger">* email is required</small> : '' }
-                      {formErrors.email.length > 0 && (
-                         <span className="text-danger">{formErrors.email}</span>
-              )}
-                   </div>
-                <div className="form-group">
-                    <label >Password</label>
-                    <input type="password" className="form-control"  
-                                    name="password"
-                                    noValidate
-                                    onChange={this.handleChange}/>
-                       {this.state.invalidError && (this.state.password === null) ? 
-                    <small className="text-danger">* password is required</small> : '' }
-                     {formErrors.password.length > 0 && (
-                <span className="text-danger">{formErrors.password}</span>
-              )}
-                </div>
+                          {this.state.invalidError && (this.state.email === null) ? 
+                          <small className="text-danger">* email is required</small> : '' }
+                          {formErrors.email.length > 0 && (
+                          <span className="text-danger">{formErrors.email}</span>)}
+                      </div>
+                      <div className="form-group">
+                        <label >Password</label>
+                          <input type="password" className="form-control"  
+                          name="password"
+                          noValidate
+                          onChange={this.handleChange}/>
+                          {this.state.invalidError && (this.state.password === null) ? 
+                          <small className="text-danger">* password is required</small> : '' }
+                          {formErrors.password.length > 0 && (
+                          <span className="text-danger">{formErrors.password}</span>)}
+                      </div>
             
-                <div className="container justify-content">
-          <Link to="/signup">
-            <small className="text-primary">Sign Up |</small>
-          </Link>
-          <Link to="/login">
-          <small className="text-primary">| Forgot Password?</small>
-          </Link>
-            </div>
+                      <div className="container justify-content">
+                        <Link to="/signup">
+                          <small className="text-primary">Sign Up |</small>
+                        </Link>
+                        <Link to="/login">
+                          <small className="text-primary">| Forgot Password?</small>
+                        </Link>
+                      </div>
 
                   
-                  <button  
-                  onClick={this.handleSubmit}
-                  type="submit"
-                  disabled={this.doesFormHaveErrors()}
-                  className={`btn ${this.doesFormHaveErrors() ? 
-                  "btn-secondary": 
-                  "btn-primary"} 
-                  text-light`}>
-                  Login
-                  </button>
-                  
-            
-                    </div>
+                      <button  
+                        onClick={this.handleSubmit}
+                        type="submit"
+                        className={`btn ${this.doesFormHaveErrors() ? 
+                        "btn-secondary": 
+                        "btn-primary"} 
+                        text-light`}>
+                        Login
+                      </button>
+                  </div>
                 </form>
             </div>
 
         )
     }
 }
+
 export default withRouter(LoginForm);
     
