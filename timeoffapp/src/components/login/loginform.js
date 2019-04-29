@@ -1,29 +1,14 @@
 import React from 'react';
 import '../styles/App.css';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from "axios";
-// import swal from '@sweetalert/with-react';
+import Swal from "sweetalert2";
 
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
   );
   
-  const formValid = ({ formErrors, ...rest }) => {
-    let valid = true;
-  
-    // validate form errors being empty
-    Object.values(formErrors).forEach(val => {
-      val.length > 0 && (valid = false);
-    });
-  
-    // validate the form was filled out
-    Object.values(rest).forEach(val => {
-      val === null && (valid = false);
-    });
-  
-    return valid;
-  };
 class LoginForm extends React.Component{
     constructor(props) {
         super(props);
@@ -37,35 +22,46 @@ class LoginForm extends React.Component{
             password: ""
           }
         };
+
+        this.doesFormHaveErrors = this.doesFormHaveErrors.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
       }
 
 
       componentDidMount(){
-        const token = localStorage.getItem("blog-token");
+        const token = localStorage.getItem("owatimer-token");
 
         if(token) return this.props.history.push("/dashboard");
     }
 
+    doesFormHaveErrors(){
+      const errors = Object.values(this.state.formErrors).reduce((prev, curr) => {
+        return curr ? prev + 1 : prev;
+      }, 0)
+
+      return !!errors;
+    }
     
       async handleSubmit (e) {
 
         e.preventDefault();
     
         try{
-          if (formValid(this.state)) {
+          if(this.doesFormHaveErrors()) 
+          return this.setState({invalidError: true});
+
             let user = {email: this.state.email, password: this.state.password}
            
             const res = await axios.post('http://localhost:5000/user/login', user)
             const token = res.data.data.token;
 
-            localStorage.setItem("blog-token", token);
+            localStorage.setItem("owatimer-token", token);
 
             this.props.history.push("/dashboard");
-  
-          } else {
-            this.setState({invalidError: true})
-           
-          }
+            Swal.fire(
+              "Login Successful"
+            )
+
         }catch(err){
           console.log("An error occured", err.response);
         }
@@ -131,12 +127,18 @@ class LoginForm extends React.Component{
           </Link>
             </div>
 
-                  { formValid(this.state) ?    
-                  <button onClick={this.handleSubmit} type="button" className="btn btn-primary text-light">
-                       <Link  className="text-light" to="/dashboard">Login</Link>
+                  
+                  <button  
+                  onClick={this.handleSubmit}
+                  type="submit"
+                  disabled={this.doesFormHaveErrors()}
+                  className={`btn ${this.doesFormHaveErrors() ? 
+                  "btn-secondary": 
+                  "btn-primary"} 
+                  text-light`}>
+                  Login
                   </button>
-                  :    <button type="submit" className="btn btn-primary text-light">Login</button>
-                  }
+                  
             
                     </div>
                 </form>
@@ -145,5 +147,5 @@ class LoginForm extends React.Component{
         )
     }
 }
-export default LoginForm;
+export default withRouter(LoginForm);
     

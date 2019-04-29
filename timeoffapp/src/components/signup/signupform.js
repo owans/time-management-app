@@ -1,30 +1,17 @@
 import React from 'react';
 import '../styles/App.css';
 import '../styles/index.css';
+import {withRouter} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from "axios";
-import {Link} from 'react-router-dom';
+import Swal from "sweetalert2";
 
 
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
   );
   const onlyLetterRegex = RegExp(/^[A-Za-z]+$/)
-  
-  const formValid = ({ formErrors, ...rest }) => {
-    let valid = true;
-  
-    // validate form errors being empty
-    Object.values(formErrors).forEach(val => {
-      val.length > 0 && (valid = false);
-    });
-  
-    // validate the form was filled out
-    Object.values(rest).forEach(val => {
-      val === null && (valid = false);
-    });
-    return valid;
-  };
+
 class SignUpForm extends React.Component{
     constructor(props) {
         super(props);
@@ -39,10 +26,9 @@ class SignUpForm extends React.Component{
           email: null,
           department: null,
           dob: null,
-          age: null,
-          manager: null,
           country: null,
           timezone: null,
+          manager: null,
           password: null,
           invaildError: false,
           formErrors: {
@@ -56,34 +42,63 @@ class SignUpForm extends React.Component{
             password: ""
           }
         };
+
+        this.doesFormHaveErrors = this.doesFormHaveErrors.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
       }
 
       componentDidMount(){
-        const token = localStorage.getItem("blog-token");
+        const token = localStorage.getItem("owatimer-token");
 
         if(token) return this.props.history.push("/dashboard");
     }
 
+    doesFormHaveErrors(){
+      const errors = Object.values(this.state.formErrors).reduce((prev, curr) => {
+        return curr ? prev + 1 : prev;
+      }, 0)
+
+      return !!errors;
+    }
     
-      async handleSubmit (e){
-        e.preventDefault();
-    
-        try{
-          if (formValid(this.state)) {
-            const res = await axios.post("http://localhost:5000/user", this.state);
+    async handleSubmit (e) {
 
-            const token = res.data.data.token;
+      e.preventDefault();
+  
+      try{
+        if(this.doesFormHaveErrors()) 
+        return this.setState({invalidError: true});
 
-            localStorage.setItem("blog-token", token);
-
-            this.props.history.push("/dashboard");
+          let user = {
+            companyName: this.state.companyName,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            department: this.state.department,
+            dob: this.state.dob,
+            country: this.state.country,
+            timezone: this.state.timezone,
+            manager: this.state.manager,
+            password: this.state.password,
           }
-          
-        }catch(err){
-          console.log("An error occured", err.response);
-        }
-      
+         
+          const res = await axios.post('http://localhost:5000/user', user)
+
+          const token = res.data.data.token;
+
+          localStorage.setItem("owatimer-token", token);
+
+          this.props.history.push("/dashboard");
+
+          Swal.fire(
+            "Registration Successful"
+          )
+
+      }catch(err){
+        console.log("An error occured", err.response);
       }
+    };
   
 
       handleChange = e => {
@@ -128,8 +143,7 @@ class SignUpForm extends React.Component{
         : "";
       break;
           case "password":
-            formErrors.password =
-              value.length < 6 ? "minimum 6 characaters required" : "";
+            formErrors.password = value.length < 6 ? "minimum 6 characters required" : "";
             break;
           default:
             break;
@@ -138,120 +152,115 @@ class SignUpForm extends React.Component{
         this.setState({ formErrors, [name]: value }, () => console.log(this.state));
       };
     render() {
-        const { formErrors } = this.state;
+      const { formErrors } = this.state;
         return(
-            <div className="signup-container">
-                <form className="container mb-5" onSubmit={this.handleSubmit} noValidate style={{padding: '2% 20%' }}>
-                    <div className="">
-                    <div className="form-group">
-                    <label >Company Name</label>
-                    <input type="text" className="form-control" 
-                          name="company_name"  noValidate onChange={this.handleChange}/>
-                    {this.state.invaildError && (this.state.companyName === null) ? 
-                    <small className="text-danger">* Please input name of company</small> : '' } 
-                    {(<span className="text-danger">{formErrors.companyName}</span>)}
-                   </div>
-                   <div className="form-group">
-                    <label >First Name</label>
-                    <input type="text" className="form-control" 
-                          name="first_name"  noValidate onChange={this.handleChange}/>
-                        {this.state.invaildError && (this.state.firstName === null) ? 
-                    <small className="text-danger">* Please input your first name</small> : '' } 
-                      {formErrors.firstName.length > 0 && (
-                         <span className="text-danger">{formErrors.firstName}</span>)}
-                   </div>
-                   <div className="form-group">
-                    <label >Last Name</label>
-                    <input type="text" className="form-control" 
-                          name="last_name"  noValidate onChange={this.handleChange}/>
-                    {this.state.invaildError && (this.state.lastName === null) ? 
-                    <small className="text-danger">* Your last name is needed</small> : '' } 
-                      {formErrors.lastName.length > 0 && (
-                         <span className="text-danger">{formErrors.lastName}</span>
-              )}
-                   </div>
-                    <div className="form-group">
-                    <label >Email address</label>
-                    <input type="email" className="form-control" placeholder="you@email.com"
-                          name="email"  noValidate onChange={this.handleChange}/>
-                    {this.state.invaildError && (this.state.email === null) ? 
-                    <small className="text-danger">* please input a valid email</small> : '' } 
-                      {formErrors.email.length > 0 && (
-                         <span className="text-danger">{formErrors.email}</span>
-              )}
-                   </div>
+          <div className="signup-container">
+            <form className="container mb-5" onSubmit={this.handleSubmit} noValidate style={{padding: '2% 20%' }}>
+              <div className="">
+              <div className="form-group">
+              <label >Company Name</label>
+                <input type="text" 
+                  className="form-control" 
+                  name="companyName"  noValidate 
+                  onChange={this.handleChange}/>
+                  {this.state.invaildError && (this.state.companyName === null) ? 
+                  <small className="text-danger">* Please input name of company</small> : '' } 
+                  {(<span className="text-danger">{formErrors.companyName}</span>)}
+              </div>
+          <div className="form-group">
+              <label >First Name</label>
+                <input type="text" 
+                  className="form-control" 
+                  name="firstName"  noValidate 
+                  onChange={this.handleChange}/>
+                  {this.state.invaildError && (this.state.firstName === null) ? 
+                  <small className="text-danger">* Please input your first name</small> : '' } 
+                  {formErrors.firstName.length > 0 && (
+                  <span className="text-danger">{formErrors.firstName}</span>)}
+          </div>
+          <div className="form-group">
+              <label >Last Name</label>
+                <input type="text" className="form-control" 
+                name="lastName"  noValidate onChange={this.handleChange}/>
+                {this.state.invaildError && (this.state.lastName === null) ? 
+                <small className="text-danger">* Your last name is needed</small> : '' } 
+                {formErrors.lastName.length > 0 && (
+                <span className="text-danger">{formErrors.lastName}</span>)}
+          </div>
+          <div className="form-group">
+              <label >Email address</label>
+                <input type="email" className="form-control" placeholder="you@email.com"
+                name="email"  noValidate onChange={this.handleChange}/>
+                {this.state.invaildError && (this.state.email === null) ? 
+                <small className="text-danger">* please input a valid email</small> : '' } 
+                {formErrors.email.length > 0 && (
+                <span className="text-danger">{formErrors.email}</span>)}
+          </div>
+          <div className="form-group">
+              <label >Department</label>
+                <input type="text" className="form-control" 
+                name="department"  noValidate onChange={this.handleChange}/>
+                {this.state.invaildError && (this.state.department === null) ? 
+                <small className="text-danger">* Please input department</small> : '' } 
+                {formErrors.department.length > 0 && (
+                <span className="text-danger">{formErrors.department}</span>)}
+          </div>
 
+          <div className="form-group">
+              <label >Date-Of-Birth</label>
+                <input type="date" className="form-control"   
+                name="dob"  noValidate onChange={this.handleChange}/>
+                {this.state.invaildError && (this.state.dob === null) ? 
+                <small className="text-danger">* Please input date of birth</small> : '' } 
+                {formErrors.dob.length > 0 && (
+                <span className="text-danger">{formErrors.dob}</span>)}
+          </div>
 
-
-                    <div className="form-group">
-                    <label >Department</label>
-                    <input type="text" className="form-control" 
-                          name="department"  noValidate onChange={this.handleChange}/>
-                    {this.state.invaildError && (this.state.department === null) ? 
-                    <small className="text-danger">* Please input department</small> : '' } 
-                      {formErrors.department.length > 0 && (
-                         <span className="text-danger">{formErrors.department}</span>
-              )}
-                   </div>
-
-                      <div className="form-group">
-                    <label >Date-Of-Birth</label>
-                    <input type="date" className="form-control"   
-                          name="dob"  noValidate onChange={this.handleChange}/>
-                    {this.state.invaildError && (this.state.dob === null) ? 
-                    <small className="text-danger">* Please input date of birth</small> : '' } 
-                      {formErrors.dob.length > 0 && (
-                         <span className="text-danger">{formErrors.dob}</span>
-              )}
-                   </div>
-
-                  <div className="form-group">
-                    <label >Manager's name</label>
-                    <input type="text" className="form-control"
-                          name="manager"  noValidate onChange={this.handleChange}/>
-                    {this.state.invaildError && (this.state.manager === null) ? 
-                    <small className="text-danger">* Please fill in your manager's name</small> : '' } 
-                      {formErrors.manager.length > 0 && (
-                         <span className="text-danger">{formErrors.manager}</span>
-              )}
-              
-                   </div>
-                <div className="form-group">
-                    <label >Password</label>
-                    <input type="password" className="form-control" 
-                                    name="password"
-                                    noValidate
-                                    onChange={this.handleChange}/>
-                    {this.state.invaildError && (this.state.password === null) ? 
-                    <small className="text-danger">* Please fill in password. Be careful!</small> : '' } 
-                     {formErrors.password.length > 0 && (
-                <span className="text-danger">{formErrors.password}</span>
-              )}
-                </div>
-                <div className="form-group">
-                    <label >Country</label>
-                    <select className="form-control" name="country" id="sel1">
-                        <option>Nigeria</option>
-                    </select>
-                    </div>
-                    <div className="form-group">
-                    <label>Time Zone</label>
-                    <select className="form-control" name="timezone" id="sel1">
-                        <option>West Africa/Lagos</option>
-                    </select>
-                    </div>
-            
-                { formValid(this.state) ? 
-                <button className="btn btn-primary ">
-                <Link className="text-light" to="/dashboard">Register</Link></button> :
-                      <button type="submit" className="btn btn-primary">Register</button>
-                }
-             
-                    </div>
-                </form>
-            </div>
-
-        )
-    }
+          <div className="form-group">
+              <label>Manager's name</label>
+                <input type="text" className="form-control" name="manager"  noValidate 
+                onChange={this.handleChange}/>
+                {this.state.invaildError && (this.state.manager === null) ? 
+                <small className="text-danger">* Please fill in your manager's name</small> : '' }
+                {formErrors.manager.length > 0 && (<span className="text-danger">{formErrors.manager}</span>)}    
+          </div>
+          <div className="form-group">
+              <label >Password</label>
+                <input type="password" className="form-control" 
+                name="password"
+                noValidate
+                onChange={this.handleChange}/>
+                {this.state.invaildError && (this.state.password === null) ? 
+                <small className="text-danger">* Please fill in password. Be careful!</small> : ''}
+                {formErrors.password.length > 0 && (
+                <span className="text-danger">{formErrors.password}</span>)}
+          </div>
+          <div className="form-group">
+              <label >Country</label>
+                <select className="form-control" name="country" id="sel1">
+                  <option>Nigeria</option>
+                </select>
+          </div>
+          <div className="form-group">
+              <label>Time Zone</label>
+                <select className="form-control" name="timezone" id="sel1">
+                  <option>West Africa/Lagos</option>
+                </select>
+          </div>
+                
+          <button  
+          onClick={this.handleSubmit}
+          type="submit"
+          disabled={this.doesFormHaveErrors()}
+          className={`btn ${this.doesFormHaveErrors() ? "btn-secondary": "btn-primary"} text-light`}
+          >
+          SignUp
+          </button>   
+        </div>
+      </form>
+    </div>
+    )
+  }
 }
-export default SignUpForm;
+
+export default withRouter(SignUpForm);
