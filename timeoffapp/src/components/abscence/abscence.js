@@ -128,7 +128,6 @@ calculateDuration = (days) => {
         <form name="form" method="post" action="thanks for filling out the abscence form">
         <fieldset>
           <div className="form-container-request">
-
           <div class="form-group">
             <select class="form-control" onClick={this.handeleLeavetype} id="exampleFormControlSelect1" required>
             {

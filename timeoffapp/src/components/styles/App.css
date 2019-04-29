@@ -99,18 +99,6 @@ html {
   font-family: 'Courier New', Courier, monospace;
 }
 
-.signup-container{
-  margin-top: 50px;
-}
-
-.login-container{
-  margin-top: 50px;
-}
-
-.welcome-container{
-  margin-top: 50px;
-}
-
 .flex-footer{
   position: fixed;
   left: 0;
@@ -232,6 +220,22 @@ form input {
   font-size: 20px;
   text-align: center;
 }
+
+.signup-container{
+  margin-top: 50px;
+  padding-top: 50px;
+}
+
+.login-container{
+  margin-top: 50px;
+  padding-top: 50px
+}
+
+.welcome-container{
+  margin-top: 50px;
+  padding-top: 50px;
+}
+
 }
 
 .custom-toast {
