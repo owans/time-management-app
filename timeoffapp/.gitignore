@@ -9,7 +9,7 @@ node_modules*
 /coverage
 
 # production
-
+/build
 /.vscode
 
 # misc
@@ -28,3 +28,5 @@ src*
 public*
 build/static/css*.map
 build/static/js*.map
+
+/static.json
