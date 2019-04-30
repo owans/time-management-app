@@ -239,12 +239,14 @@ class SignUpForm extends React.Component{
           <div className="form-group">
               <label >Country</label>
                 <select className="form-control" name="country" id="sel1">
+                  <option>Select</option>
                   <option>Nigeria</option>
                 </select>
           </div>
           <div className="form-group">
               <label>Time Zone</label>
                 <select className="form-control" name="timezone" id="sel1">
+                  <option>Select</option>
                   <option>West Africa/Lagos</option>
                 </select>
           </div>
