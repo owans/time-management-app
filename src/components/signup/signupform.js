@@ -84,7 +84,7 @@ class SignUpForm extends React.Component{
             password: this.state.password,
           }
          
-          const res = await axios.post(`${env.api}/user`, user)
+          const res = await axios.post(`${env.api}/user/signup`, user)
 
           const token = res.data.data.token;
 
@@ -245,7 +245,7 @@ class SignUpForm extends React.Component{
           </div>
           <div className="form-group">
               <label>Time Zone</label>
-                <select className="form-control" name="timezone" id="sel1">
+                <select className="form-control" name="timezone" id="sel2">
                   <option>Select</option>
                   <option>West Africa/Lagos</option>
                 </select>
