@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../src/components/styles/index.css';
 import '../src/components/styles/App.css';
 import {Route, Switch} from 'react-router-dom';
-import MainHeader from '././components/common/mainheader';
+// import MainHeader from '././components/common/mainheader';
 import Footer from '././components/common/footer';
 import Home from './components/home/home';
 import Login from './components/login/login';
@@ -17,7 +17,6 @@ class App extends Component{
     render(){
     return (
       <React.Fragment>
-        <MainHeader/>
         <Switch>
               <Route exact path="/" component={Home}></Route>
               <Route exact path="/login" component={Login}></Route>

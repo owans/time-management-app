@@ -42,3 +42,18 @@ body{
   .fas{
     background-color: #296484;
   }
+
+  .abscence{
+    width: 50%!important;
+    padding-top: 2%!important;
+    display: flex!important;
+    flex-direction: column!important;
+    align-items: center!important;
+    justify-content: center!important;
+  }
+
+
+  .abscence{
+    margin-top: 50px!important;
+    padding-top: 50px!important;
+  }

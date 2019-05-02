@@ -24,19 +24,6 @@ class MainHeader extends React.Component{
                       </div>
                     </nav>
                 
-            
-            {/* <nav className="navbar navbar-expand-lg">
-                <Link to="/" style={{textDecoration:"none"}}>
-                <li className="logo navbar-brand" >OwaTimer</li>
-                </Link>
-
-                <ul className="nav-links navbar-nav ml-auto">
-                <Link to="/login" style={{textDecoration:"none"}}>
-                <li className="nav-item nav-items text-center padtb5">Login</li>
-                </Link>
-                </ul>
-            </nav>
-             */}
             </div>
         )
     }
