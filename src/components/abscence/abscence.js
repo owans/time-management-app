@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import "./employee.css";
+import {withRouter} from "react-router-dom";
+import "../styles/employee.css";
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.css';
-import EmployeeHeader from './employeeheader';
+import env from "../../env";
+import axios from "axios";
+import EmployeeHeader from "./employeeheader";
 import Swal from 'sweetalert2';
-
-
-const FillForm = `please fill out an absence form, if any. Thank You`;
 
 const leaveType = [
   {name: 'Select Leave Type', day: 1},
@@ -23,44 +23,70 @@ let date = new Date();
 date = `${date.getFullYear()}-0${date.getMonth() + 1 }-${date.getDate()}`
 class Abscence extends Component{
     constructor(props){
-    super(props)
+    super(props);
 
     this.state = {
       fields: {},
       errors: {},
       leaveType: '',
-      startTime: date,
-      stopTime: date,
+      startdate: date,
+      enddate: date,
+      totaldays: "",
+      requestmessage: "",
+      employee: "",
       diffStartTimeStopTime: '0 Days',
       showError: false
     }
 }
 
 handleStartTime = e => {
-  let startTimeValue = e.target.value;
-  this.setState({startTime: startTimeValue})
-  const start = startTimeValue.replace(/-/g, '');
-  const stop = this.state.stopTime.replace(/-/g, '');
+  let startdateValue = e.target.value;
+  this.setState({startdate: startdateValue})
+  const start = startdateValue.replace(/-/g, '');
+  const stop = this.state.enddate.replace(/-/g, '');
   let diff = start - stop
   diff = this.calculateDuration(diff)
   this.setState({diffStartTimeStopTime: `${diff}`})
   console.log(this.state.diffStartTimeStopTime)
 }
 handleStopTime = e => {
-  let stopTimeValue = e.target.value;
-  this.setState({stopTime: stopTimeValue})
-  const start = this.state.startTime.replace(/-/g, '');
-  const stop = stopTimeValue.replace(/-/g, '');
+  let stopdateValue = e.target.value;
+  this.setState({stopDate: stopdateValue})
+  const start = this.state.startdate.replace(/-/g, '');
+  const stop = stopdateValue.replace(/-/g, '');
   let diff = stop - start
   diff = this.calculateDuration(diff)
   this.setState({diffStartTimeStopTime: `${diff}`})
   console.log(diff)
 }
+
 handeleLeavetype = e => {
   console.log(e.target.value)
   this.setState({leaveType: e.target.value})
 }
-hamdleFormSubmit = () => {
+
+async componentDidMount(){
+  try{
+    const token = localStorage.getItem("owatimer-token");
+
+    if(!token) return this.props.history.push("/login");
+
+    const res = await axios.get(`${env.api}/user/dashboard`, {
+      headers:{
+        Authorization: `Bearer ${token}`
+      }
+    })
+    this.setState({user: res.data.data});
+  }catch(err){
+    if(localStorage.getItem("owatimer-token")){
+      localStorage.removeItem("owatimer-token")
+    }
+    this.props.history.push("/login")
+  }
+}
+
+hamdleFormSubmit = (e) => {
+  e.preventDefault();
   if ((!this.state.diffStartTimeStopTime.includes('-') && this.state.diffStartTimeStopTime !== '0 Days') && 
       this.state.leaveType !== '-- Select Leave Type --') {
       console.log(this.state.diffStartTimeStopTime)
@@ -72,10 +98,23 @@ hamdleFormSubmit = () => {
   } else {
       this.setState({showError: true})
   } 
-  if (this.state.diffStartTimeStopTime === '0 Days') {
-      this.setState({showError: true})
-  } 
+  const body = {
+    leaveType: this.state.leaveType,
+    startdate: this.state.startdate,
+    enddate: this.state.enddate,
+    totaldays: this.state.totaldays,
+    requestmessage: this.state.requestmessage
+  };
+
+  axios.post(`${env.api}/request/abscence`, body).then((data) =>{
+    console.log(data);
+  }).catch((error)=>{
+    console.log(error)
+  })
+
+  this.setState({leaveType: "", startdate: date, diffStartTimeStopTime: "0 Days", requestmessage: ""}); 
 } 
+
 calculateDuration = (days) => {
   let not = undefined;
     let value = days
@@ -121,25 +160,25 @@ calculateDuration = (days) => {
   render() {
     return (
         
-      <div>
+      <React.Fragment>
       <EmployeeHeader/>
-        <p>{FillForm}</p>
+        <p>Fill A Request Form</p>
         <div className="container abscence">
-        <form name="form" method="post" action="thanks for filling out the abscence form">
+        <form name="form" noValidate>
         <fieldset>
           <div className="form-container-request">
-          <div class="form-group">
-            <select class="form-control" onClick={this.handeleLeavetype} id="exampleFormControlSelect1" required>
+          <div className="form-group">
+            <select className="form-control" name="leavetype" onClick={this.handeleLeavetype} id="exampleFormControlSelect1" required>
             {
-                        leaveType.map((item, index) => {
-                            return <option key={index}>{item.name}</option>
-                        })
-                    }
+                leaveType.map((item, index) => {
+                  return <option key={index}>{item.name}</option>
+                  })
+                }
             </select>
             {
                     (this.state.leaveType !== 'Select Leave Type') ? '' : 
                     <small className="text-danger">choose a valid leave type</small>
-                }
+                  }
                 {
                      (this.state.leaveType === '' && this.state.showError) ? 
                      <small className="text-danger">*leave type is required</small> : 
@@ -150,22 +189,22 @@ calculateDuration = (days) => {
             <div className="d-flex">
             
               <div className="form-group">
-              <label for="begin">Begin</label>
-                <input type="date" id="start" name="start" min={date} value={this.state.startTime} onChange={this.handleStartTime} required>
+              <label name="begin">Begin</label>
+                <input type="date" id="start" name="startdate" min={date} value={this.state.startdate} onChange={this.handleStartTime} required>
                 </input>
               </div>
 
               
               <div className="form-group"> 
-              <label htmlFor="end">To</label> 
-                <input type="date" value={this.state.stopTime} onChange={this.handleStopTime}
-                min={this.state.startTime}  id="end" name="end" required>
+              <label name="end">To</label> 
+                <input type="date" value={this.state.stopdate} onChange={this.handleStopTime}
+                min={this.state.startdate}  id="end" name="enddate" required>
                 </input>
               </div>
 
               
               <div className="form-group">
-              <label for="name">Duration</label>
+              <label name="duration">Duration</label>
               <input type="text" value={this.state.diffStartTimeStopTime.includes('-') ? '0 Days' : this.state.diffStartTimeStopTime } id="duration" name="duration" disabled/>
               {
                 ((this.state.diffStartTimeStopTime === '0 Days' || this.state.diffStartTimeStopTime.includes('-')) 
@@ -175,12 +214,9 @@ calculateDuration = (days) => {
               </div>
 
             </div>
-
-            
-
                 <div className="form-group">
-                <label for="exampleFormControlTextarea1">State a valid reason</label>
-                <textarea className="form-control" id="exampleFormControlTextarea1"
+                <label name="exampleFormControlTextarea1">State a valid reason</label>
+                <textarea className="form-control" name="requestmessage" id="exampleFormControlTextarea1"
                 rows="3" required></textarea> 
                 </div>
 
@@ -196,9 +232,9 @@ calculateDuration = (days) => {
                 </form>
                 </div>
             
-            </div>
+            </React.Fragment>
         )
     }
 }
 
-export default Abscence;
+export default withRouter(Abscence);

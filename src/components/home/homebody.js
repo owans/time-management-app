@@ -18,7 +18,7 @@ class HomeBody extends React.Component{
                     </div>      
                         
                         <div className="image">
-                        <img src={manage} alt="body"/>
+                            <img src={manage} alt="body"/>
                         </div>
                         
                         

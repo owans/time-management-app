@@ -4,11 +4,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../styles/employee.css';
 import {Link} from 'react-router-dom';
 import Footer from '../footer/footer';
-// import Welcome from '../welcomeemployee/welcomeemployee';
+import Welcome from '../welcomeemployee/welcomeemployee';
 
-
-const User = "Owans";
-const WelcomeUser = `Welcome ${User}`
 
 class EmployeeHeader extends React.Component{
     render(){
@@ -37,8 +34,7 @@ class EmployeeHeader extends React.Component{
     </ul>
   </div>
 </nav>
-            {/* <Welcome/> */}
-            <p>{WelcomeUser}</p>
+            <Welcome/>
             <Footer/>
             </div>
         )
