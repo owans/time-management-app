@@ -23,15 +23,29 @@ let date = new Date();
 date = `${date.getFullYear()}-0${date.getMonth() + 1 }-${date.getDate()}`
 
 class Abscence extends Component{
+<<<<<<< HEAD
+=======
+    constructor(props){
+    super(props);
+>>>>>>> 34a22b47b857502dd6cb2e72a1d2ae2886a446bf
 
     state = {
       user: "",
       fields: {},
       errors: {},
+<<<<<<< HEAD
       leaveType: "",
       startdate: date,
       enddate: date,
       requestmessage: "",
+=======
+      leaveType: '',
+      startdate: date,
+      enddate: date,
+      totaldays: "",
+      requestmessage: "",
+      employee: "",
+>>>>>>> 34a22b47b857502dd6cb2e72a1d2ae2886a446bf
       diffStartTimeStopTime: '0 Days',
       showError: false
     }
@@ -47,16 +61,24 @@ handleStartTime = e => {
   console.log(this.state.diffStartTimeStopTime)
 }
 handleStopTime = e => {
+<<<<<<< HEAD
   let enddateValue = e.target.value;
   this.setState({enddate: enddateValue})
   const start = this.state.startdate.replace(/-/g, '');
   const stop = enddateValue.replace(/-/g, '');
+=======
+  let stopdateValue = e.target.value;
+  this.setState({stopDate: stopdateValue})
+  const start = this.state.startdate.replace(/-/g, '');
+  const stop = stopdateValue.replace(/-/g, '');
+>>>>>>> 34a22b47b857502dd6cb2e72a1d2ae2886a446bf
   let diff = stop - start
   diff = this.calculateDuration(diff)
   this.setState({diffStartTimeStopTime: `${diff}`})
   console.log(diff)
 }
 
+<<<<<<< HEAD
 async componentDidMount() {
   try {
     const token = localStorage.getItem("owatimer-token");
@@ -79,11 +101,14 @@ async componentDidMount() {
   }
 }
 
+=======
+>>>>>>> 34a22b47b857502dd6cb2e72a1d2ae2886a446bf
 handeleLeavetype = e => {
   console.log(e.target.value)
   this.setState({leaveType: e.target.value})
 }
 
+<<<<<<< HEAD
 handeleRequestMessage = e => {
   console.log(e.target.value)
   this.setState({ requestmessage: e.target.value })
@@ -99,13 +124,53 @@ hamdleFormSubmit = e => {
     this.setState({ showError: true })
   }
 
+=======
+async componentDidMount(){
+  try{
+    const token = localStorage.getItem("owatimer-token");
+
+    if(!token) return this.props.history.push("/login");
+
+    const res = await axios.get(`${env.api}/user/dashboard`, {
+      headers:{
+        Authorization: `Bearer ${token}`
+      }
+    })
+    this.setState({user: res.data.data});
+  }catch(err){
+    if(localStorage.getItem("owatimer-token")){
+      localStorage.removeItem("owatimer-token")
+    }
+    this.props.history.push("/login")
+  }
+}
+
+hamdleFormSubmit = (e) => {
+  e.preventDefault();
+  if ((!this.state.diffStartTimeStopTime.includes('-') && this.state.diffStartTimeStopTime !== '0 Days') && 
+      this.state.leaveType !== '-- Select Leave Type --') {
+      console.log(this.state.diffStartTimeStopTime)
+      Swal.fire(
+        'Success',
+        'Your Leave Request Has Being Submitted',
+        'success'
+      )
+  } else {
+      this.setState({showError: true})
+  } 
+>>>>>>> 34a22b47b857502dd6cb2e72a1d2ae2886a446bf
   const body = {
     leaveType: this.state.leaveType,
     startdate: this.state.startdate,
     enddate: this.state.enddate,
+<<<<<<< HEAD
     totaldays: this.state.diffStartTimeStopTime,
     requestmessage: this.state.requestmessage,
     employee: this.state.user._id
+=======
+    totaldays: this.state.totaldays,
+    requestmessage: this.state.requestmessage
+>>>>>>> 34a22b47b857502dd6cb2e72a1d2ae2886a446bf
   };
 
   axios.post(`${env.api}/request/abscence`, body).then((data) =>{
@@ -114,7 +179,11 @@ hamdleFormSubmit = e => {
     console.log(error)
   })
 
+<<<<<<< HEAD
   this.setState({leaveType: "", startdate: date, enddate: date, diffStartTimeStopTime: "0 Days", requestmessage: ""}); 
+=======
+  this.setState({leaveType: "", startdate: date, diffStartTimeStopTime: "0 Days", requestmessage: ""}); 
+>>>>>>> 34a22b47b857502dd6cb2e72a1d2ae2886a446bf
 } 
 
 calculateDuration = (days) => {
@@ -170,6 +239,7 @@ calculateDuration = (days) => {
         <fieldset>
           <div className="form-container-request">
           <div className="form-group">
+<<<<<<< HEAD
             <select className="form-control" name="leaveType" onClick={this.handeleLeavetype} id="exampleFormControlSelect1" required>
             {
               leaveType.map((item, index) => {
@@ -177,6 +247,19 @@ calculateDuration = (days) => {
                 })
             }
             </select>
+=======
+            <select className="form-control" name="leavetype" onClick={this.handeleLeavetype} id="exampleFormControlSelect1" required>
+            {
+                leaveType.map((item, index) => {
+                  return <option key={index}>{item.name}</option>
+                  })
+                }
+            </select>
+            {
+                    (this.state.leaveType !== 'Select Leave Type') ? '' : 
+                    <small className="text-danger">choose a valid leave type</small>
+                  }
+>>>>>>> 34a22b47b857502dd6cb2e72a1d2ae2886a446bf
                 {
                      (this.state.leaveType === '' && this.state.showError) ? 
                      <small className="text-danger">*leave type is required</small> : 
@@ -195,7 +278,11 @@ calculateDuration = (days) => {
               
               <div className="form-group"> 
               <label name="end">To</label> 
+<<<<<<< HEAD
                 <input type="date" value={this.state.enddate} onChange={this.handleStopTime}
+=======
+                <input type="date" value={this.state.stopdate} onChange={this.handleStopTime}
+>>>>>>> 34a22b47b857502dd6cb2e72a1d2ae2886a446bf
                 min={this.state.startdate}  id="end" name="enddate" required>
                 </input>
               </div>
@@ -213,6 +300,7 @@ calculateDuration = (days) => {
 
             </div>
                 <div className="form-group">
+<<<<<<< HEAD
                   <label name="exampleFormControlTextarea1">State a valid reason</label>
                     <textarea className="form-control" name="requestmessage" onChange={this.handeleRequestMessage} id="exampleFormControlTextarea1"
                       rows="3" required></textarea> 
@@ -222,6 +310,11 @@ calculateDuration = (days) => {
                   :''
                  }
 
+=======
+                <label name="exampleFormControlTextarea1">State a valid reason</label>
+                <textarea className="form-control" name="requestmessage" id="exampleFormControlTextarea1"
+                rows="3" required></textarea> 
+>>>>>>> 34a22b47b857502dd6cb2e72a1d2ae2886a446bf
                 </div>
 
                 <div>
