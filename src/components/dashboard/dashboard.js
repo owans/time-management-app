@@ -32,13 +32,20 @@ const MoreCalendarDate = [
   new Date(2019 , 8, 16), new Date(2019, 9, 8), new Date(2018, 10, 30), new Date(2019, 11, 24)
 ]
 
+<<<<<<< HEAD
 class Dashboard extends React.Component{
+=======
+export default class Dashboard extends React.Component{
+>>>>>>> 34a22b47b857502dd6cb2e72a1d2ae2886a446bf
   constructor(props){
     super(props);
 
 
     this.state = {
+<<<<<<< HEAD
       loading: true,
+=======
+>>>>>>> 34a22b47b857502dd6cb2e72a1d2ae2886a446bf
       showMore: false,
       showMoreText: 'Show More',
       user: ""
@@ -47,6 +54,7 @@ class Dashboard extends React.Component{
 }
 
 async componentDidMount(){
+<<<<<<< HEAD
     try{
         const token = localStorage.getItem("owatimer-token");
 
@@ -70,12 +78,47 @@ async componentDidMount(){
 }
 
 
+=======
+  try{
+      const token = localStorage.getItem("owatimer-token");
+
+      if(!token) return this.props.history.push("/signup");
+
+      const res = await axios.get(`${env.api}/user/dashboard`, {
+          headers:{
+              Authorization: `Bearer ${token}`
+          }
+      })
+
+      this.setState({user: res.data.data});
+            console.log(this.state.user);
+      
+  }catch(err){
+    if (localStorage.getItem("owatimer-token")) {
+      localStorage.removeItem("owatimer-token");
+    }
+   this.props.history.push("/signup");
+  }
+}
+
+>>>>>>> 34a22b47b857502dd6cb2e72a1d2ae2886a446bf
 handeleShowMore = () => {
     this.setState({
         showMore: !this.state.showMore,
         showMoreText: 'Show Less'
     })
 }
+<<<<<<< HEAD
+=======
+
+    render(){
+        return(
+            <div>
+                <EmployeeHeader/>
+                    <div  className="justify-content-center container">
+                        <h3 className='text-primary mb-4'>{`Welcome ${this.state.user.firstName}, ${this.state.user.lastName}`}</h3>                      
+                    </div>
+>>>>>>> 34a22b47b857502dd6cb2e72a1d2ae2886a446bf
 
 render(){
     if (this.state.loading) return <p>loading...</p>
@@ -88,6 +131,7 @@ render(){
 
             <div className="justify-content-center container">
                 <h3 className="text-secondary ">Statistics</h3>
+<<<<<<< HEAD
                 <div className="row p mt-3 statistics">
                 <div className="col-md-2 sta">
                 <div className="card">
@@ -110,6 +154,30 @@ render(){
                                     <li  className="list-group-item"> {item.name} 
                                         <span className="badge badge-primary float-right ">{item.days}</span></li>
                                     </div>
+=======
+                    <div className="row p mt-3 statistics">
+                    <div className="col-md-2 sta">
+                    <div className="card">
+                    <div className="card-header text-center bg-secondary text-light">Days Remaining</div>
+                    <div className="card-body">
+                        <h1>8.5</h1>
+                        <h6>Out of 21 in allowance</h6>
+                    </div> 
+                    </div>
+                    </div>
+
+                    <div className="col-md-3 sta">
+                    <div className="card">
+                    <div className="card-header text-center bg-secondary text-light">Used so far</div>
+                    <div className="card-body">
+                        <ul className="list-group"> 
+                            {
+                                typeOfTimeOff.map((item , index) => {
+                                    return <div key={index}>
+                                        <li  className="list-group-item"> {item.name} 
+                                            <span className="badge badge-primary float-right ">{item.days}</span></li>
+                                        </div>
+>>>>>>> 34a22b47b857502dd6cb2e72a1d2ae2886a446bf
                                 })
                             }
                         </ul>
@@ -125,12 +193,20 @@ render(){
                             <ul className="list-group"> 
                                 {
                                 requests.map(item => {
+<<<<<<< HEAD
                                         return <div key={item.date}>
                                                 <li className="list-group-item"> {item.name} 
                                                     <span className="badge badge-primary float-right ">{item.date}</span>
                                                 </li>
                                             </div>
                                         })
+=======
+                                    return <div key={item.date}>
+                                        <li className="list-group-item"> {item.name} 
+                                            <span className="badge badge-primary float-right ">{item.date}</span></li>
+                                        </div>
+                                })
+>>>>>>> 34a22b47b857502dd6cb2e72a1d2ae2886a446bf
                                 }
                             </ul>
                             </div> 
@@ -146,8 +222,11 @@ render(){
                                     <h6>Name: {this.state.user.firstName}</h6>
                                     <h6>Department: {this.state.user.manager}</h6>
                                     <h6>Position: {this.state.user.department}</h6>
+<<<<<<< HEAD
                                 </div>
                                 </div> 
+=======
+>>>>>>> 34a22b47b857502dd6cb2e72a1d2ae2886a446bf
                                 </div>
                         </div>
                       </div>
