@@ -21,6 +21,7 @@ const leaveType = [
 
 let date = new Date();
 date = `${date.getFullYear()}-0${date.getMonth() + 1 }-${date.getDate()}`
+
 class Abscence extends Component{
 
     state = {
@@ -72,7 +73,7 @@ async componentDidMount() {
   } catch (err) {
     if (localStorage.getItem("owatimer-token")) {
       localStorage.removeItem("owatimer-token");
-      console.log(err.response);
+        console.log(err.response);
     }
     this.props.history.push("/login");
   }
@@ -171,10 +172,10 @@ calculateDuration = (days) => {
           <div className="form-group">
             <select className="form-control" name="leaveType" onClick={this.handeleLeavetype} id="exampleFormControlSelect1" required>
             {
-                leaveType.map((item, index) => {
-                  return <option key={index}>{item.name}</option>
-                  })
-                }
+              leaveType.map((item, index) => {
+                return <option key={index}>{item.name}</option>
+                })
+            }
             </select>
                 {
                      (this.state.leaveType === '' && this.state.showError) ? 
@@ -212,9 +213,9 @@ calculateDuration = (days) => {
 
             </div>
                 <div className="form-group">
-                <label name="exampleFormControlTextarea1">State a valid reason</label>
-                <textarea className="form-control" name="requestmessage" onChange={this.handeleRequestMessage} id="exampleFormControlTextarea1"
-                rows="3" required></textarea> 
+                  <label name="exampleFormControlTextarea1">State a valid reason</label>
+                    <textarea className="form-control" name="requestmessage" onChange={this.handeleRequestMessage} id="exampleFormControlTextarea1"
+                      rows="3" required></textarea> 
                 {
                   (this.state.requestmessage === '' && this.state.showError)
                   ?<small className="text-danger">Please provide a comment on the request type</small>

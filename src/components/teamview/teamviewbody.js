@@ -39,11 +39,11 @@ export default class TeamviewBody extends React.Component{
         }
       }
     
-    render(){
-        const { user, request } = this.state;
-        return(
-        <div>
-            <div className="container">
+render(){
+  const { user, request } = this.state;
+    return(
+      <div>
+        <div className="container">
           <h5 className="text-danger text-center my-4">
             Pending requests to be approved
           </h5>
@@ -136,7 +136,7 @@ export default class TeamviewBody extends React.Component{
           </table>
         </div>
                     
-        </div>
-        )
-    }
+      </div>
+    )
+  }
 }

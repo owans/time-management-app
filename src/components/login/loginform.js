@@ -9,7 +9,6 @@ import Swal from "sweetalert2";
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
   );
-  
 class LoginForm extends React.Component{
     constructor(props) {
         super(props);
