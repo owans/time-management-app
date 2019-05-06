@@ -1,120 +1,142 @@
 import React from 'react';
+// import env from "../../env";
+import axios from "axios";
 
 export default class TeamviewBody extends React.Component{
+    state = {
+        user: "",
+        request: [],
+        loading: true
+      };
+
+      async componentDidMount() {
+        try {
+          const token = localStorage.getItem("owatimer-token");
+    
+          if (!token) return this.props.history.push("/login");
+    
+          const profile = await axios.get("http://localhost:5002/user/dashboard", {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+    
+          const requestBody = await axios.get("http://localhost:5002/request", {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+    
+          this.setState({
+            user: profile.data.data,
+            request: requestBody.data.data,
+            loading: false
+          });
+          console.log(this.state.request);
+          console.log(this.state.user);
+        } catch (err) {
+            console.log(err);
+        }
+      }
+    
     render(){
+        const { user, request } = this.state;
         return(
-            
-            
         <div>
-            <div>
-                        <div className="d-flex justify-content-between container">
-                        <h6 className="text-primary">Leave Request to Approve</h6>
-                        </div>
-
-                        <div>
-                        <table class="table container">
-                        <thead>
-                        <tr>
-                        <th scope="col">Employee</th>
-                        <th scope="col">Department</th>
-                        <th scope="col">Request Date</th>
-                        <th scope="col">Leave Period</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Number Of Days</th>
-                        <th scope="col">Available Days</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                        <td>Owanate Amachree</td>
-                        <td>Finance</td>
-                        <td>2020-12-20</td>
-                        <td>2021-1-14 To 2021-1-24</td>
-                        <td>Maternity</td>
-                        <td>10</td>
-                        <td>2</td>
-                        <td><button type="button" class="btn btn-danger">Reject</button></td>
-                        <td><button type="button" class="btn btn-danger">Pending</button></td>
-
-                        </tr>
-                        <tr>
-                        <td>Ibiere Boyle</td>
-                        <td>HR</td>
-                        <td>2019-2-19</td>
-                        <td>2019-4-10 To 2019-4-24</td>
-                        <td>Vacation</td>
-                        <td>14</td>
-                        <td>7</td>
-                        <td><button type="button" class="btn btn-danger">Reject</button></td>
-                        <td><button type="button" class="btn btn-danger">Pending</button></td>
-                        </tr>
-                        <tr>
-                        <td>Opuine Amachree</td>
-                        <td>Personnel</td>
-                        <td>2019-6-2</td>
-                        <td>2019-8-14 To 2019-8-17</td>
-                        <td>Marriage Purposes</td>
-                        <td>3</td>
-                        <td>Nil</td>
-                        <td><button type="button" class="btn btn-danger">Reject</button></td>
-                        <td><button type="button" class="btn btn-success">Approved</button></td>
-                        </tr>
-                        </tbody>
-                        </table>
-
-                        </div>
-                            </div>
-              <div className="d-flex justify-content-between container">
-                <h6 className="text-primary">Approved Request</h6>
-                </div>
-
-                <table class="table font container">
-                <thead>
-                <tr>
-                    <th scope="col">Employee</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Deducted</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Approved By</th>
-                    <th scope="col">Remark</th>
-                    <th scope="col">Status</th>
-
+            <div className="container">
+          <h5 className="text-danger text-center my-4">
+            Pending requests to be approved
+          </h5>
+          {this.state.loading ? (
+            <p>Automatically loads and updates requests if any</p>
+          ) : (
+            ""
+          )}
+          <table className="container table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Employee</th>
+                <th scope="col">Department</th>
+                <th scope="col">Leave Type</th>
+                <th scope="col">Leave Period</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Leave Reason</th>
+                <th scope="col" />
+                <th scope="col" />
+              </tr>
+            </thead>
+            
+            <tbody>
+              {request.map((item, index) => (
+                <tr key={index}>
+                  <td>{`${user.firstName} ${user.lastName}`}</td>
+                  <td>{user.department}</td>
+                  <td>{item.leaveType}</td>
+                  <td>{`${item.startdate} To ${item.enddate}`}</td>
+                  <td>{item.totaldays}</td>
+                  <td>{item.requestmessage}</td>
+                  <td>
+                    <button className="btn btn-success mr-2">
+                      Approve
+                    </button>
+                  </td>
+                  <td>
+                    <button className="btn btn-danger">Decline</button>
+                  </td>
                 </tr>
-                </thead>
-                <tbody>
-                <tr>
-                <td>Owanate Amachree</td>      
-                <td>Maternity</td>
+              ))}
+            </tbody>
+
+            
+          </table>
+          <h5 className="text-success text-center my-4">
+            Approved Request
+          </h5>
+          <table className="container table mb-5 py-3">
+            <thead>
+              <tr>
+                <th scope="col">Employee</th>
+                <th scope="col">Type</th>
+                <th scope="col">Deducted</th>
+                <th scope="col">Date</th>
+                <th scope="col">Approved By</th>
+                <th scope="col">Remark</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Owanate Amachree</td>
+                <td>Software</td>
                 <td>10 Days</td>
-                <td>2021-1-15 To 2021-1-25</td>
-                <td>Kunle</td>
+                <td>2020/1/10 To 2020/1/20</td>
+                <td>Jim</td>
                 <td>Good</td>
                 <td>Approved</td>
-                </tr>
-                <tr>
-                <td>Ibiere boyle</td>
+              </tr>
+              <tr>
+                <td>Opubo Amachree</td>
                 <td>Vacation</td>
-                <td>7 Days</td>
-                <td>2019-3-15 To 2019-3-21</td>
+                <td>30 Days</td>
+                <td>2019/3/01 To 2019/3/30</td>
                 <td>Mayowa</td>
                 <td>Good</td>
                 <td>Approved</td>
-                </tr>
-                <tr>
-                <td>Opuine Amachre</td>    
-                <td>Wedding Purpose</td>
-                <td>14 Days</td>
-                <td>2019-5-1 To 2019-5-14</td>
+              </tr>
+              <tr>
+                <td>Opuine Amachree</td>
+                <td>Sick Leave</td>
+                <td>10 Days</td>
+                <td>2019/5/1 To 2019/5/10</td>
                 <td>Kunle</td>
                 <td>Good</td>
                 <td>Approved</td>
-                </tr>
-                </tbody>
-                </table>
+              </tr>
+            </tbody>
+          </table>
+        </div>
                     
-                        </div>
-                        )
-                    }
-                }
+        </div>
+        )
+    }
+}

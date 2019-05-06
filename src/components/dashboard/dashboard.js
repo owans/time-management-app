@@ -3,9 +3,10 @@ import '../styles/App.css';
 import '../styles/employee.css';
 import "bootstrap/dist/css/bootstrap.css";
 import Calendar from 'react-calendar';
+import {withRouter} from "react-router-dom";
 import EmployeeHeader from '../common/employeeheader';
 import Footer from '../footer/footer';
-import env from "../../env";
+// import env from "../../env";
 import axios from 'axios';
 
 const typeOfTimeOff = [
@@ -31,12 +32,13 @@ const MoreCalendarDate = [
   new Date(2019 , 8, 16), new Date(2019, 9, 8), new Date(2018, 10, 30), new Date(2019, 11, 24)
 ]
 
-export default class Dashboard extends React.Component{
+class Dashboard extends React.Component{
   constructor(props){
     super(props);
 
 
     this.state = {
+      loading: true,
       showMore: false,
       showMoreText: 'Show More',
       user: ""
@@ -45,27 +47,28 @@ export default class Dashboard extends React.Component{
 }
 
 async componentDidMount(){
-  try{
-      const token = localStorage.getItem("owatimer-token");
+    try{
+        const token = localStorage.getItem("owatimer-token");
 
-      if(!token) return this.props.history.push("/signup");
+        if(!token) return this.props.history.push("/signup");
 
-      const res = await axios.get(`${env.api}/user/dashboard`, {
-          headers:{
-              Authorization: `Bearer ${token}`
-          }
-      })
+        const res = await axios.get("http://localhost:5002/user/dashboard", {
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+        })
 
-      this.setState({user: res.data.data});
-            console.log(this.state.user);
-      
-  }catch(err){
-    if (localStorage.getItem("owatimer-token")) {
-      localStorage.removeItem("owatimer-token");
+        this.setState({loading:false, user: res.data.data});
+        console.log(this.state.user);
+        
+    }catch(err){
+      if (localStorage.getItem("owatimer-token")) {
+        localStorage.removeItem("owatimer-token");
+      }
+     this.props.history.push("/signup");
     }
-   this.props.history.push("/signup");
-  }
 }
+
 
 handeleShowMore = () => {
     this.setState({
@@ -75,6 +78,7 @@ handeleShowMore = () => {
 }
 
     render(){
+        if (this.state.loading) return <p>loading...</p>
         return(
             <div>
                 <EmployeeHeader/>
@@ -234,3 +238,5 @@ handeleShowMore = () => {
         )
     }
 }
+
+export default withRouter(Dashboard);

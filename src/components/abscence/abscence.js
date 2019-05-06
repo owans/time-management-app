@@ -3,7 +3,7 @@ import {withRouter} from "react-router-dom";
 import "../styles/employee.css";
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.css';
-import env from "../../env";
+// import env from "../../env";
 import axios from "axios";
 import EmployeeHeader from "./employeeheader";
 import Swal from 'sweetalert2';
@@ -22,22 +22,18 @@ const leaveType = [
 let date = new Date();
 date = `${date.getFullYear()}-0${date.getMonth() + 1 }-${date.getDate()}`
 class Abscence extends Component{
-    constructor(props){
-    super(props);
 
-    this.state = {
+    state = {
+      user: "",
       fields: {},
       errors: {},
-      leaveType: '',
+      leaveType: "",
       startdate: date,
       enddate: date,
-      totaldays: "",
       requestmessage: "",
-      employee: "",
       diffStartTimeStopTime: '0 Days',
       showError: false
     }
-}
 
 handleStartTime = e => {
   let startdateValue = e.target.value;
@@ -50,14 +46,36 @@ handleStartTime = e => {
   console.log(this.state.diffStartTimeStopTime)
 }
 handleStopTime = e => {
-  let stopdateValue = e.target.value;
-  this.setState({stopDate: stopdateValue})
+  let enddateValue = e.target.value;
+  this.setState({enddate: enddateValue})
   const start = this.state.startdate.replace(/-/g, '');
-  const stop = stopdateValue.replace(/-/g, '');
+  const stop = enddateValue.replace(/-/g, '');
   let diff = stop - start
   diff = this.calculateDuration(diff)
   this.setState({diffStartTimeStopTime: `${diff}`})
   console.log(diff)
+}
+
+async componentDidMount() {
+  try {
+    const token = localStorage.getItem("owatimer-token");
+
+    if (!token) return this.props.history.push("/login");
+
+    const res = await axios.get("http://localhost:5002/user/dashboard", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    this.setState({user: res.data.data });
+  } catch (err) {
+    if (localStorage.getItem("owatimer-token")) {
+      localStorage.removeItem("owatimer-token");
+      console.log(err.response);
+    }
+    this.props.history.push("/login");
+  }
 }
 
 handeleLeavetype = e => {
@@ -65,54 +83,37 @@ handeleLeavetype = e => {
   this.setState({leaveType: e.target.value})
 }
 
-async componentDidMount(){
-  try{
-    const token = localStorage.getItem("owatimer-token");
-
-    if(!token) return this.props.history.push("/login");
-
-    const res = await axios.get(`${env.api}/user/dashboard`, {
-      headers:{
-        Authorization: `Bearer ${token}`
-      }
-    })
-    this.setState({user: res.data.data});
-  }catch(err){
-    if(localStorage.getItem("owatimer-token")){
-      localStorage.removeItem("owatimer-token")
-    }
-    this.props.history.push("/login")
-  }
+handeleRequestMessage = e => {
+  console.log(e.target.value)
+  this.setState({ requestmessage: e.target.value })
 }
 
-hamdleFormSubmit = (e) => {
+
+hamdleFormSubmit = e => {
   e.preventDefault();
-  if ((!this.state.diffStartTimeStopTime.includes('-') && this.state.diffStartTimeStopTime !== '0 Days') && 
-      this.state.leaveType !== '-- Select Leave Type --') {
-      console.log(this.state.diffStartTimeStopTime)
-      Swal.fire(
-        'Success',
-        'Your Leave Request Has Being Submitted',
-        'success'
-      )
+  if (this.state.leaveType !== '' && this.state.requestmessage !== '' && !this.state.diffStartTimeStopTime.includes('-') && this.state.diffStartTimeStopTime !== '0 Days') {
+    console.log(this.state.diffStartTimeStopTime)
+    Swal.fire('Form submitted sucessfully, please check teamview page for the list of requests made')
   } else {
-      this.setState({showError: true})
-  } 
+    this.setState({ showError: true })
+  }
+
   const body = {
     leaveType: this.state.leaveType,
     startdate: this.state.startdate,
     enddate: this.state.enddate,
-    totaldays: this.state.totaldays,
-    requestmessage: this.state.requestmessage
+    totaldays: this.state.diffStartTimeStopTime,
+    requestmessage: this.state.requestmessage,
+    employee: this.state.user._id
   };
 
-  axios.post(`${env.api}/request/abscence`, body).then((data) =>{
+  axios.post("http://localhost:5002/request/abscence", body).then((data) =>{
     console.log(data);
   }).catch((error)=>{
     console.log(error)
   })
 
-  this.setState({leaveType: "", startdate: date, diffStartTimeStopTime: "0 Days", requestmessage: ""}); 
+  this.setState({leaveType: "", startdate: date, enddate: date, diffStartTimeStopTime: "0 Days", requestmessage: ""}); 
 } 
 
 calculateDuration = (days) => {
@@ -168,17 +169,13 @@ calculateDuration = (days) => {
         <fieldset>
           <div className="form-container-request">
           <div className="form-group">
-            <select className="form-control" name="leavetype" onClick={this.handeleLeavetype} id="exampleFormControlSelect1" required>
+            <select className="form-control" name="leaveType" onClick={this.handeleLeavetype} id="exampleFormControlSelect1" required>
             {
                 leaveType.map((item, index) => {
                   return <option key={index}>{item.name}</option>
                   })
                 }
             </select>
-            {
-                    (this.state.leaveType !== 'Select Leave Type') ? '' : 
-                    <small className="text-danger">choose a valid leave type</small>
-                  }
                 {
                      (this.state.leaveType === '' && this.state.showError) ? 
                      <small className="text-danger">*leave type is required</small> : 
@@ -197,7 +194,7 @@ calculateDuration = (days) => {
               
               <div className="form-group"> 
               <label name="end">To</label> 
-                <input type="date" value={this.state.stopdate} onChange={this.handleStopTime}
+                <input type="date" value={this.state.enddate} onChange={this.handleStopTime}
                 min={this.state.startdate}  id="end" name="enddate" required>
                 </input>
               </div>
@@ -209,15 +206,21 @@ calculateDuration = (days) => {
               {
                 ((this.state.diffStartTimeStopTime === '0 Days' || this.state.diffStartTimeStopTime.includes('-')) 
                 && this.state.showError) ? 
-                <small className="text-danger">invalid duration must be more than 0 Days</small> : '' 
+                <small className="text-danger">invalid, duration must be more than 0 Days</small> : '' 
             }              
               </div>
 
             </div>
                 <div className="form-group">
                 <label name="exampleFormControlTextarea1">State a valid reason</label>
-                <textarea className="form-control" name="requestmessage" id="exampleFormControlTextarea1"
+                <textarea className="form-control" name="requestmessage" onChange={this.handeleRequestMessage} id="exampleFormControlTextarea1"
                 rows="3" required></textarea> 
+                {
+                  (this.state.requestmessage === '' && this.state.showError)
+                  ?<small className="text-danger">Please provide a comment on the request type</small>
+                  :''
+                 }
+
                 </div>
 
                 <div>

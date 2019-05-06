@@ -1,8 +1,9 @@
 import React from 'react';
 import LoginForm from '../login/loginform';
 import MainHeader from "../common/mainheader";
+import {withRouter} from "react-router-dom";
 
-export default class login extends React.Component{
+class login extends React.Component{
   render(){
     return(
       <div>
@@ -12,3 +13,5 @@ export default class login extends React.Component{
     )
   }
 }
+
+export default withRouter(login)
