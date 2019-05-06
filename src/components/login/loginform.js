@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/App.css';
 import {Link, withRouter} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
-// import env from "../../env";
+import env from "../../env";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -58,10 +58,8 @@ class LoginForm extends React.Component{
           return this.showError();
 
             let user = {email: this.state.email, password: this.state.password}
-           
-            // const res = await axios.post(`${env.api}/user/login`, user)
 
-            const res = await axios.post('http://localhost:5002/user/login', user)
+            const res = await axios.post(`${env.api}/user/login`, user)
 
             const token = res.data.data.token;
 

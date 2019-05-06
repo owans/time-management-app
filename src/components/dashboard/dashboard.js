@@ -6,7 +6,7 @@ import Calendar from 'react-calendar';
 import {withRouter} from "react-router-dom";
 import EmployeeHeader from '../common/employeeheader';
 import Footer from '../footer/footer';
-// import env from "../../env";
+import env from "../../env";
 import axios from 'axios';
 
 const typeOfTimeOff = [
@@ -52,7 +52,7 @@ async componentDidMount(){
 
         if(!token) return this.props.history.push("/signup");
 
-        const res = await axios.get("http://localhost:5002/user/dashboard", {
+        const res = await axios.get(`${env.api}/user/dashboard`, {
             headers:{
                 Authorization: `Bearer ${token}`
             }

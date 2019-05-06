@@ -1,5 +1,5 @@
 import React from 'react';
-// import env from "../../env";
+import env from "../../env";
 import axios from "axios";
 
 export default class TeamviewBody extends React.Component{
@@ -15,13 +15,13 @@ export default class TeamviewBody extends React.Component{
     
           if (!token) return this.props.history.push("/login");
     
-          const profile = await axios.get("http://localhost:5002/user/dashboard", {
+          const profile = await axios.get(`${env.api}/user/dashboard`, {
             headers: {
               Authorization: `Bearer ${token}`
             }
           });
     
-          const requestBody = await axios.get("http://localhost:5002/request", {
+          const requestBody = await axios.get(`${env.api}/request`, {
             headers: {
               Authorization: `Bearer ${token}`
             }

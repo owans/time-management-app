@@ -3,7 +3,7 @@ import {withRouter} from "react-router-dom";
 import "../styles/employee.css";
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.css';
-// import env from "../../env";
+import env from "../../env";
 import axios from "axios";
 import EmployeeHeader from "./employeeheader";
 import Swal from 'sweetalert2';
@@ -62,7 +62,7 @@ async componentDidMount() {
 
     if (!token) return this.props.history.push("/login");
 
-    const res = await axios.get("http://localhost:5002/user/dashboard", {
+    const res = await axios.get(`${env.api}/user/dashboard`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -107,7 +107,7 @@ hamdleFormSubmit = e => {
     employee: this.state.user._id
   };
 
-  axios.post("http://localhost:5002/request/abscence", body).then((data) =>{
+  axios.post(`${env.api}/request/abscence`, body).then((data) =>{
     console.log(data);
   }).catch((error)=>{
     console.log(error)
