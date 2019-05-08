@@ -178,12 +178,12 @@ render(){
                       </div>
                     </div>
                     <div className="container">
-                        <h2 className="text-center mt-4 mb-3">Calendar</h2>
+                        <h2 className="mt-4 mb-3">Calendar</h2>
                     <div className="row align-content-center">
                         {this.state.allLeaveRequest.length > 0 ? (
                         this.state.allLeaveRequest.map((item, index) => {
                         return (
-                            <div key={index} className="col-md-3 ">
+                            <div key={index} className="col-md-3">
                                 <Calendar
                                 value={[
                                 new Date(item.startdate),
@@ -223,11 +223,11 @@ render(){
                             return (
                                 <tr key={index}>
                                 <td>{item.leaveType}</td>
-                                <td>{item.duration}</td>
+                                <td>{item.totaldays}</td>
                                 <td>
-                                {this.convertToshorDate(item.startDate)}
+                                {this.convertDate(item.startdate)}
                                 {" - "}
-                                {this.convertToshorDate(item.stopDate)}
+                                {this.convertDate(item.stopdate)}
                                 </td>
                                 <td>Pending</td>
                                 <td>
