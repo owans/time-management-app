@@ -114,7 +114,7 @@ render(){
                 </div>
                 </div>
 
-                <div className="col-md-3 sta">
+                <div className="col-md-4 sta">
               <div className="card">
                 <div className="card-header bg-secondary text-light">
                   Request history
@@ -203,57 +203,46 @@ render(){
                 <h3 className="head text-secondary container">All Absences</h3>
                 </div>
 
-                <div className="d-flex justify-content-center dashboard-absences mx-3">
-                    <table class="table container responsive table-sm">
-                        <thead>
-                            <tr>
-                            <th scope="col">Types</th>
-                            <th scope="col">Duration</th>
-                            <th scope="col">Dates</th>
-                            <th scope="col">Status</th>
-                            <th scope="col"></th>
-                            <th scope="col">Approved By</th>
+                <div className="row mb-5 py-3">
+                    {this.state.allLeaveRequest.length === 0 ? (
+                    <h6>No Available Leave Request</h6>
+                    ) : (
+                <table className="table table-hover container table-sm">
+                    <thead>
+                         <tr>
+                         <th>Type</th>
+                         <th>Duration</th>
+                         <th>Dates</th>
+                         <th>Status</th>
+                         <th />
+                         <th>Aprroved By</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.allLeaveRequest.map((item, index) => {
+                            return (
+                                <tr key={index}>
+                                <td>{item.leaveType}</td>
+                                <td>{item.duration}</td>
+                                <td>
+                                {this.convertToshorDate(item.startDate)}
+                                {" - "}
+                                {this.convertToshorDate(item.stopDate)}
+                                </td>
+                                <td>Pending</td>
+                                <td>
+                                    <span className="mx-2 text-danger">
+                                    <i className="fas fa-trash" />
+                                    </span>
+                                    </td>
+                                <td>Mayowa</td>
                             </tr>
-                        </thead>
-                        <tbody className="">
-                        <tr>
-                        <td>Study leave</td>
-                        <td>10</td>
-                        <td>2021-1-15 - 2021-1-25</td>
-                        <td>Approved</td>
-                        <td><button><i class="fas fa-trash-alt delete"></i></button></td>
-                        <td>Kunle</td>
-                        </tr>
-
-                        <tr>
-                        <td>Health</td>
-                        <td>5</td>
-                        <td>2019-3-22 - 2019-3-27</td>
-                        <td>Pending</td>
-                        <td><button><i class="fas fa-trash delete"></i></button></td>
-                        <td>Mayowa</td>
-                        </tr>
-
-                        <tr>
-                        <td>Holiday</td>
-                        <td>10</td>
-                        <td>2019-4-5 - 2019-4-15</td>
-                        <td>Pending</td>
-                        <td><button><i class="fas fa-trash delete"></i></button></td>
-                        <td>Kunle</td>
-                        </tr>
-                        <tr>
-      
-                        <td>Time Off</td>
-                        <td>14</td>
-                        <td>2019-5-01 - 2019-5-15</td>
-                        <td>Pending</td>
-                        <td><button><i class="fas fa-trash delete"></i></button></td>
-                        <td>Mayowa</td>
-                        </tr>
-                    </tbody>
-                    </table>
-                </div>
+                        );
+                        })}
+                </tbody>
+              </table>
+                    )}
+             </div>
             </div>
  
             <Footer/>
