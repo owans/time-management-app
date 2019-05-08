@@ -114,7 +114,7 @@ render(){
                 </div>
                 </div>
 
-                <div className="col-sm-10 col-md-6">
+                <div className="col-md-4 sta">
               <div className="card">
                 <div className="card-header bg-secondary text-light">
                   Request history
@@ -128,7 +128,7 @@ render(){
                             <li className="list-group-item">
                               {item.leaveType}
                               <span className="badge badge-primary float-right ">
-                                {this.convertDate(item.startDate)}
+                                {this.convertDate(item.startdate)}
                               </span>
                             </li>
                           </div>
@@ -194,7 +194,7 @@ render(){
                         );
                     })
                 ) : (
-                        <h6>No Active Calender Pl Fill A New Absence</h6>
+                        <h6>No Active Calender Please Fill A New Absence</h6>
                     )}
                 </div>
                 </div>   
