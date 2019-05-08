@@ -114,7 +114,7 @@ render(){
                 </div>
                 </div>
 
-                <div className="col-md-4 sta">
+                <div className="col-md-3 sta">
               <div className="card">
                 <div className="card-header bg-secondary text-light">
                   Request history
@@ -144,7 +144,7 @@ render(){
                 </div>
                 </div>
 
-                <div className="col-md-4 sta">
+                <div className="col-md-3 sta">
                     <div className="card">
                     <div className="card-header bg-secondary text-center text-light">Available Types</div>
                     <div className="card-body">
