@@ -76,8 +76,6 @@ async componentDidMount(){
             allLeaveRequest: request,
             slicedRequest: sliced
         });
-        console.log(this.state.user);
-        console.log(this.state.allLeaveRequest);
         
     }catch(err){
       if (localStorage.getItem("owatimer-token")) {
@@ -187,7 +185,7 @@ render(){
                                 <Calendar
                                 value={[
                                 new Date(item.startdate),
-                                new Date(item.stopdate)
+                                new Date(item.enddate)
                                 ]}
                                 />
                             </div>
